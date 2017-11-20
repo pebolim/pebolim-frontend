@@ -1,0 +1,24 @@
+.color-theme{
+    color:#00FFA2;
+    color:#22B782;
+    color:#88FF72;
+    color:#1C8BFF;
+    /* greys */
+    color:#D6D6D6;
+    color:#323232;
+    color:#262626;
+    color:#272727;
+    color:#1C1C1C;
+}
+
+#content{
+    min-height: 100vh;
+    background-color: #262626;
+    color:#D6D6D6;
+}
+
+
+#content > h1{
+    padding:0;
+    margin:0;
+}

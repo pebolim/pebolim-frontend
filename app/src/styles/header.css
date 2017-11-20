@@ -1,0 +1,7 @@
+.header{
+    border-radius: 0;
+    border-bottom: 1px solid #151515;
+    height: 60px;
+    background-color: #1c1c1c;
+    font-family: 'Lato', sans-serif;
+}
