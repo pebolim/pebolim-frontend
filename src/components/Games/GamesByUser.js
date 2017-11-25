@@ -1,6 +1,6 @@
 import React from 'react';
 import Time from 'react-time-format'
-
+import { Container, Header } from 'semantic-ui-react';
 
 export default class Game extends React.Component {
     constructor(props) {
@@ -19,17 +19,15 @@ export default class Game extends React.Component {
 
     render() {
         const gamesList = this.state.games.map((item, i) => (
-            <div key={i}>
-                    <div >
-                        <h4>{item.id}</h4>
-                        <p ><Time value={item.matchday} format="YYYY/MM/DD" /></p>
-                        <a >Go somewhere</a>
-                    </div>
-                </div>
+            <Container key={i}>
+                    <Header>{item.id} - <Time value={item.matchday} format="YYYY/MM/DD" /></Header>
+                    
+            </Container>
         ));
         return (
             <div>
-                <h1>Game {gamesList}</h1>
+                <h1>Listagem de jogos do jogador ...</h1>
+                {gamesList}
             </div>
         );
     }
