@@ -8,16 +8,16 @@ ToDo
 
 ### Prerequisites
 
-Install:
+#### Install:
     -Vagrant
     -Text Editor (Visual Code, Sublime, etc)
     -Command Line (Git Bash, Powershell, etc)
-Dependencies:
+##### Dependencies:
     -Vagrant Box = "jadesystems/rails-5-1"
 
 ### Installing
 
-ToDo
+Clone/Download the pebolim-frontend project to your system.
 
 ## Running the tests
 
@@ -33,7 +33,11 @@ ToDo
 
 ## Deployment
 
-ToDo
+    -Open you project on a text editor.
+    -Open terminal
+    -Run npm install
+    -Run npm start
+    -Open browser with the url generated.
 
 ## Built With
 
