@@ -11,7 +11,6 @@ export default class Layout extends React.Component {
     }
     
     render(){
-        console.log(this.props)
         return (
             <div id="wrapper">
                 <Header />
