@@ -5,7 +5,7 @@ export default class Footer extends React.Component{
     render(){
         return (
             <footer>
-                <div>Footer</div>
+                <div>© 2017 Pebolim Team. All rights reserved.</div>
             </footer>
         );
     }
