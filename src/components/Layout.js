@@ -6,9 +6,6 @@ import Main from "./Main";
 import '../styles/layout.css'
 
 export default class Layout extends React.Component {
-    constructor(){
-        super();
-    }
     
     render(){
         return (
