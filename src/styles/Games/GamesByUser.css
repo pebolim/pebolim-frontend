@@ -1,0 +1,22 @@
+.container{
+    background-color:#cccccc;
+    margin-top:2%;
+}
+#title {
+    color:#00FFA2;
+    text-align: center;
+}
+
+.header {
+    text-align:center;
+}
+
+.ui.blue.header,
+.ui.red.header{
+    font-size: 5rem;
+}
+
+.ui.black.header{
+    font-size: 3rem;
+    margin-top: 5%;
+}

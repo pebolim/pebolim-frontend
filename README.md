@@ -13,7 +13,6 @@ ToDo
     -Text Editor (Visual Code, Sublime, etc)
     -Command Line (Git Bash, Powershell, etc)
 ##### Dependencies:
-    -Vagrant Box = "jadesystems/rails-5-1"
 
 ### Installing
 
