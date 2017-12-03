@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link } from "react-router-dom";
-import { Button, Icon } from 'semantic-ui-react';
+
+import {Link} from "react-router-dom";
+import { Flag, Button, Icon, Image } from 'semantic-ui-react';
 
 
 import '../styles/header.css';
@@ -53,7 +54,9 @@ export default class Header extends React.Component {
             <header>
                 <div className="nav">
                     <ul className="nav-main">
-                        <li>Logo</li>
+                        <li>
+                            <Image src={require('../assets/images/logoPEBOLIM.png')} size='mini' />
+                       </li>
                         <li><Link to='/home'>Home</Link></li>
                         <li><Link to='/game/create'>Create Game</Link></li>
 
