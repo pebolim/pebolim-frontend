@@ -8,6 +8,7 @@ a {
     color:#22B782;
     color:#88FF72;
     color:#1C8BFF;
+    color:#FF150D;
     /* greys */
     color:#D6D6D6;
     color:#323232;
@@ -20,6 +21,7 @@ a {
     min-height: 100vh;
     background-color: #262626;
     color:#D6D6D6;
+    padding:4% 7% !important;  
 }
 
 
