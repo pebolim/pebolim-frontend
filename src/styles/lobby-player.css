@@ -8,6 +8,7 @@
 }
 
 .player_hover{
+    /* box-shadow: 0 0 10px rgba(0,0,0,.3); */
     position: relative;
     height: 180px;
     width: 180px;
@@ -15,6 +16,8 @@
     border: solid 1px #1C1C1C;
     border-radius: 3px;
     transition: border .1s ease-out;
+    background-size: cover !important;
+    background-position: 50%;
 }
 
     .player_hover:hover {
@@ -35,8 +38,8 @@
 
 
 .join-icon{
-    width: 80px;
-    height: 80px;  
+    width: 75px;
+    height: 75px;  
     
     position: absolute;
     top: 50%;
@@ -44,7 +47,14 @@
     transform: translateY(-50%) translateX(-50%) !important;
 
     cursor: pointer;
+    transition: none 33ms cubic-bezier(.3,0,.7,1);
+    transition-property: all;
 }
+
+    .join-icon:hover{
+        width: 82px;
+        height: 82px;
+    }
 
 .player-name{
     height: 40px;

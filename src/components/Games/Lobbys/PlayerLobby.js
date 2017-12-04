@@ -3,8 +3,6 @@ import Player from './Player';
 import '../../../styles/lobby.css';
 import { Grid } from 'semantic-ui-react';
 
-//import { Grid ,Col , Row} from 'react-bootstrap';
-
 export default class PlayerLobby extends React.Component {
     constructor(props) {
         super(props)
@@ -106,7 +104,18 @@ export default class PlayerLobby extends React.Component {
                                     </div>                                   
                                 </Grid.Column>
                                 <Grid.Column width={4} className="lobby-selection-details">
-                                
+                                    <div className="team-box">
+                                    
+                                        <div className="attacker-tag">
+                                            {/* <div>attacker</div> */}
+                                        </div>
+                                        <div className="versus">
+                                            <div>VS</div>
+                                        </div>
+                                        <div className="defender-tag">
+                                            {/* <div>defender</div> */}
+                                        </div>
+                                    </div> 
                                 </Grid.Column>
                                 <Grid.Column width={6} className="team-blue">
                                     <div className="team-box">
@@ -122,8 +131,16 @@ export default class PlayerLobby extends React.Component {
                             </Grid.Row>
                         </Grid>  
                     </Grid.Column>
-                    <Grid.Column width={4} className="lobby-details-box">
-                        
+                    <Grid.Column width={4} className="lobby-info-box">
+                        <div className="lobby-info">
+                            <div className="lobby-info-title">
+                                <div>Game Details</div>
+                            </div>
+                            <div className="lobby-info"></div>
+                            <div className="lobby-begin-button-wrapper">
+                                <button className="lobby-begin-button" onClick={this.redirectToGameView}>Start Game</button>
+                            </div>
+                        </div>
                     </Grid.Column>
                 </Grid.Row>
             </Grid>      
@@ -131,10 +148,4 @@ export default class PlayerLobby extends React.Component {
     }
 }
 
-const Hover = ({ onHover, children }) => (
-    <div className="hover">
-        <div className="hover__no-hover">{children}</div>
-        <div className="hover__hover">{onHover}</div>
-    </div>
-)
 
