@@ -12,7 +12,7 @@ export default class Game extends React.Component {
         };
     }
     componentDidMount() {
-        fetch(`http://localhost:3000/player/` + this.props.match.params["id"] + `/games`)
+        fetch(`http://localhost:3000/player/games`)
             .then(result => result.json())
             .then(gms => this.setState({ games: gms.games }))
 

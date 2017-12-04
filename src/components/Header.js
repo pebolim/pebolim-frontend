@@ -25,16 +25,6 @@ function LogoutButton(props) {
 
 export default class Header extends React.Component {
 
-    constructor(props) {
-        super(props);
-
-        this.state={
-            isLoggedIn: false
-        }
-
-        this.state = { isLoggedIn: null };
-    }
-
     render() {
         console.log(localStorage.getItem('token'));
         let log = null;

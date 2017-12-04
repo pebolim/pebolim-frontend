@@ -18,7 +18,7 @@ export default class Main extends React.Component {
                 <Route path="/home" component={Home} />
                 <Route path="/game/create" component={CreateGame} /> 
                 <Route path="/game/:id/lobby" component={PlayerLobby} />                 
-                <Route path="/player/:id/games" component={GamesByUser} />
+                <Route path="/player/games" component={GamesByUser} />
             </Switch>           
         );
     }
