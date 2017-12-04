@@ -1,0 +1,72 @@
+.clear{
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100%;
+}
+
+/*__________________ LOBBY LAYOUT___________________*/
+
+.lobby-container{
+    width: 100%;
+    min-height: 600px;
+    background-color:#1C1C1C;
+    background-clip:content-box;
+}
+
+.lobby-selection-box{
+    height: 100%;
+    padding: 0 !important;
+}
+    .lobby-selection-columns > div{
+        box-sizing : border-box;
+        height: 100%;
+        padding: 0 !important;
+        background-color: rgb(53, 53, 53);
+    }
+
+    .lobby-selection-details{
+        background-color: #1C1C1C !important;
+    }
+
+.lobby-details-box{
+    padding: 0 !important;
+}
+/*__________________ LOBBY LAYOUT END ___________________*/
+
+/*__________________ TEAM SELECTION LAYOUT ___________________*/
+.team-red{
+    color:#FF3232;
+    height: 100%;
+}
+
+.team-blue{
+    color:#1C8BFF;
+}
+
+.team-box{
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    padding: 0 20px;
+    text-align: center;
+    height: 100%;
+}
+
+.header{
+    height: 10%;
+    font-size: 3em;
+    font-family: 'Teko', sans-serif;
+    font-weight: 600;
+}
+    .header > div{
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+.attacker, .defender{
+    height: 40%;
+}
+
+.empty{
+    height: 10%;
+}
