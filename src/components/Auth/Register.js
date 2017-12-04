@@ -12,11 +12,21 @@ export default class Register extends React.Component {
             password: '',
             nickname: '',
             age: 0,
-            loading:false
+            loading: false
         };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(event) {
+        this.setState({
+            [event.target.name]: event.target.value
+        });
     }
 
     handleSubmit(event) {
+        console.log(this.state);
         event.preventDefault();
         fetch('http://127.0.0.1:3000/signin', {
             method: 'POST',
@@ -24,11 +34,14 @@ export default class Register extends React.Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(this.state)
-        }).then(res => {
-            localStorage.setItem('token', res.token);
-        }).catch(err => {
-            console.log(err);
-        });
+        }).then(response => response.json()
+            ).then(function (data) {
+                localStorage.setItem('token', data.token);
+                window.location.reload()
+            }.bind(this)
+            ).catch(err => {
+                console.log(err);
+            });
     }
 
     render() {
@@ -46,19 +59,19 @@ export default class Register extends React.Component {
                                 <Form.Group>
                                     <Grid>
                                         <Grid.Row>
-                                            <Input name="email" label="Email" onChange={(event) => this.setState({ email: event.target.value })} />
+                                            <Input name="email" label="Email" onChange={this.handleChange} />
                                         </Grid.Row>
                                         <Grid.Row>
-                                            <Input name="password" label="Password" type="password" onChange={(event) => this.setState({ password: event.target.value })} />
+                                            <Input name="password" label="Password" type="password" onChange={this.handleChange} />
                                         </Grid.Row>
                                         <Grid.Row>
-                                            <Input name="confirmPassword" label="Password" type="password" onChange={(event) => this.setState({ confirmPassword: event.target.value })} />
+                                            <Input name="confirmPassword" label="Password" type="password" onChange={this.handleChange} />
                                         </Grid.Row>
                                         <Grid.Row>
-                                            <Input name="nickname" label="Nickname" onChange={(event) => this.setState({ nickname: event.target.value })} />
+                                            <Input name="nickname" label="Nickname" onChange={this.handleChange} />
                                         </Grid.Row>
                                         <Grid.Row>
-                                            <Input name="age" label="Age" onChange={(event) => this.setState({ age: event.target.value })} />
+                                            <Input name="age" label="Age" onChange={this.handleChange} />
                                         </Grid.Row>
                                     </Grid>
                                 </Form.Group>

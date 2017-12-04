@@ -29,11 +29,13 @@ export default class Login extends React.Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(this.state)
-    }).then(res => {
-      localStorage.setItem('token', res.token);
-    }).catch(err => {
-      console.log(err);
-    });
+    }).then(response => response.json()
+      ).then(function (data) {
+        localStorage.setItem('token', data.token)
+      }.bind(this)
+      ).catch(err => {
+        console.log(err);
+      });
   }
 
   render() {

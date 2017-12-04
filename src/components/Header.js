@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Flag, Button, Icon, Image } from 'semantic-ui-react';
 
 
@@ -18,7 +18,7 @@ function LoginButton(props) {
 function LogoutButton(props) {
     return (
         <ul className="nav-right">
-            <li><Link >Logout</Link></li>
+            <li><a onClick={() => {localStorage.removeItem('token');window.location.reload()}}>Logout</a></li>
         </ul>
     );
 }
@@ -28,38 +28,30 @@ export default class Header extends React.Component {
     constructor(props) {
         super(props);
 
-        this.handleLogoutClick = this.handleLogoutClick.bind(this);
-        this.state = { isLoggedIn: false };
-    }
-
-    componentDidMount() {
-        if (localStorage.getItem('token') != null) {
-            this.setState({ isLoggedIn: true });
+        this.state={
+            isLoggedIn: false
         }
-    }
 
-    handleLogoutClick() {
-        localStorage.setItem('token', null);
+        this.state = { isLoggedIn: null };
     }
 
     render() {
+        console.log(localStorage.getItem('token'));
         let log = null;
-        if (this.state.isLoggedIn) {
-            log = <LogoutButton onClick={this.handleLogoutClick} />;
+        if (localStorage.getItem('token') != null) {
+            log = <LogoutButton />;
         } else {
             log = <LoginButton />;
         }
-
         return (
             <header>
                 <div className="nav">
                     <ul className="nav-main">
                         <li>
                             <Image src={require('../assets/images/logoPEBOLIM.png')} size='mini' />
-                       </li>
+                        </li>
                         <li><Link to='/home'>Home</Link></li>
                         <li><Link to='/game/create'>Create Game</Link></li>
-
                     </ul>
                     {log}
                 </div>
