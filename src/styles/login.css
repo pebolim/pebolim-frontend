@@ -1,0 +1,17 @@
+.ui.labeled.input:not([class*="corner labeled"]) .label:first-child{
+    font-family: 'Teko', sans-serif;
+    background-color:#00ff94;
+    font-size: 1.5em;
+    color:black;
+    width: 100px;
+    text-align: center
+}
+
+.ui.header:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6){
+    color:white;
+}
+
+.ui.big.button{
+    background-color:white;
+    color:black;
+}

@@ -33,9 +33,9 @@ export default class Header extends React.Component {
     }
 
     componentDidMount() {
-        if (localStorage.getItem('token') != null) {
-            this.setState({ isLoggedIn: true });
-        }
+            /*if (localStorage.getItem('token') != undefined) {
+                this.setState({ isLoggedIn: true });
+            }*/
     }
 
     handleLogoutClick() {
