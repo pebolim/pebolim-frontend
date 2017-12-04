@@ -19,8 +19,11 @@ export default class Register extends React.Component {
 
     handleChange(event) {
         const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
         this.setState({
-            [target.name]: target.value
+            [name]: value
         });
     }
 
