@@ -24,11 +24,13 @@ export default class Login extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    var myHeaders = new Headers({
+      'Content-Type': 'application/json',
+    });
+    
     fetch('http://127.0.0.1:3000/login', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: myHeaders,
       body: JSON.stringify(this.state)
     }).then(response => response.json()
       ).then(function (data) {

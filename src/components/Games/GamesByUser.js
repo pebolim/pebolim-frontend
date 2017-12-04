@@ -12,7 +12,15 @@ export default class Game extends React.Component {
         };
     }
     componentDidMount() {
-        fetch(`http://localhost:3000/player/games`)
+        var headers = new Headers({
+            "Authorization":localStorage.getItem("token"),
+            'Content-Type': 'application/json'
+        });
+        var myInit = {
+            method: 'GET',
+            headers: headers
+        }
+        fetch(`http://localhost:3000/player/games`,myInit)
             .then(result => result.json())
             .then(gms => this.setState({ games: gms.games }))
 
