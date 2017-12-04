@@ -1,6 +1,7 @@
 import React from 'react';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
+import { Redirect } from 'react-router'
 import { Checkbox, Dropdown, Input, Button, Icon, Grid } from 'semantic-ui-react';
 
 import 'react-datepicker/dist/react-datepicker.css';
@@ -11,10 +12,12 @@ export default class CreateGame extends React.Component {
 
         this.state = {
             local: '',
-            isPrivate: '',
+            is_private: '',
             hour: '',
             minutes: '',
-            startDate: moment()
+            start_date: moment(),
+            redirect: false,
+            lobby_id: null
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -33,8 +36,6 @@ export default class CreateGame extends React.Component {
                 console.log("State:" + this.state.hour);
             }.bind(this)
         );
-
-        console.log("Input value:" + data.value);
     }
 
     handleTimeMinutes(e, data) {
@@ -46,8 +47,6 @@ export default class CreateGame extends React.Component {
                 console.log("State:" + this.state.hour);
             }.bind(this)
         );
-
-        console.log("Input value:" + data.value);
     }
 
     handleInputChange(event) {
@@ -69,17 +68,32 @@ export default class CreateGame extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         console.log(JSON.stringify(this.state));
-        fetch('https://127.0.0.1:3002/game/', {
+        var self = this;
+        fetch('http://127.0.0.1:3000/game/', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(this.state)
-        })
+            body: JSON.stringify({game: this.state})
+        }).then(function(response){
+            return response.json();
+        }).then(function(body){
+            console.log(body)
+            if(body.status === 201)
+                self.setState({ redirect: true, lobby_id: body.url_id })    
+               
+        });
     }
 
     render() {
+
+        const { redirect, lobby_id } = this.state;
+        
+        if (redirect) {
+            return <Redirect to={"/game/"+lobby_id+"/lobby"} />;
+        }
+         
         return (
             <div>
                 <Grid container>
@@ -104,7 +118,7 @@ export default class CreateGame extends React.Component {
                         </Grid.Column>
                         <Grid.Column>
                             <DatePicker
-                                selected={this.state.startDate}
+                                selected={this.state.start_date}
                                 onChange={this.handleChange}
                                 name="startDate"
                             />
@@ -131,7 +145,7 @@ export default class CreateGame extends React.Component {
                         </Grid.Column>
                         <Grid.Column>
                             <div className="ui fitted toggle checkbox">
-                                <input type="checkbox" name="isPrivate" onChange={this.handleInputChange} readOnly="" tabIndex="0" />
+                                <input type="checkbox" name="is_private" onChange={this.handleInputChange} readOnly="" tabIndex="0" />
                                 <label></label>
                             </div>
                         </Grid.Column>
