@@ -12,7 +12,6 @@ ToDo
     -Vagrant
     -Text Editor (Visual Code, Sublime, etc)
     -Command Line (Git Bash, Powershell, etc)
-##### Dependencies:
 
 ### Installing
 
