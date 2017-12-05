@@ -1,5 +1,4 @@
 import React from 'react';
-import Time from 'react-time-format'
 import { Form, Grid, Input,Image,Header,Button,Icon } from 'semantic-ui-react'
 import '../../styles/login.css'
 
@@ -35,8 +34,9 @@ export default class Login extends React.Component {
     }).then(response => response.json()
       ).then(function (data) {
         localStorage.setItem('token', data.token);
+        localStorage.setItem('user',JSON.stringify(data.user));
         window.location.assign("/player/games");
-      }.bind(this)
+      }
       ).catch(err => {
         console.log(err);
       });
