@@ -17,7 +17,7 @@ export default class Home extends React.Component {
                         We are a bunch of nerds who also play table football, so we wanted to create a platform that could help us organize and gather data about our games, so we came up with Pebolim to resolve those problems.
                     </div>
                 </Grid.Row>
-                <Grid.Row centered columns={4} style={{paddingTop:30}}>
+                <Grid.Row centered columns={4} style={{ paddingTop: 30 }}>
                     <Grid.Column>
                         <Image src={require('../assets/images/creatorImage.png')} />
                         <div style={{ fontSize: 30, textAlign: 'center', fontWeight: 600, paddingTop: 10 }}>
@@ -28,7 +28,7 @@ export default class Home extends React.Component {
                         <Image src={require('../assets/images/creatorImage.png')} />
                         <div style={{ fontSize: 30, textAlign: 'center', fontWeight: 600, paddingTop: 10 }}>
                             Nabo2
-                    </div>
+                        </div>
                     </Grid.Column>
                     <Grid.Column>
                         <Image src={require('../assets/images/creatorImage.png')} />
@@ -38,7 +38,7 @@ export default class Home extends React.Component {
                     </Grid.Column>
                 </Grid.Row>
 
-                <Grid.Row centered columns={4} style={{paddingTop:30}}>
+                <Grid.Row centered columns={4} style={{ paddingTop: 30 }}>
                     <Grid.Column>
                         <Image src={require('../assets/images/creatorImage.png')} />
                         <div style={{ fontSize: 30, textAlign: 'center', fontWeight: 600, paddingTop: 10 }}>

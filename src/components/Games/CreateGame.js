@@ -61,7 +61,7 @@ export default class CreateGame extends React.Component {
 
     handleChange(date) {
         this.setState({
-            startDate: date
+            start_date: date
         });
     }
 
@@ -96,7 +96,7 @@ export default class CreateGame extends React.Component {
          
         return (
             <div>
-                <Grid container>
+                <Grid>
                     <Grid.Row>
                         <h1>Criar Jogo</h1>
                     </Grid.Row>
@@ -120,7 +120,7 @@ export default class CreateGame extends React.Component {
                             <DatePicker
                                 selected={this.state.start_date}
                                 onChange={this.handleChange}
-                                name="startDate"
+                                name="start_date"
                             />
                         </Grid.Column>
                     </Grid.Row>
