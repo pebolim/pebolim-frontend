@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Link } from "react-router-dom";
-import { Flag, Button, Icon, Image } from 'semantic-ui-react';
+import { Image } from 'semantic-ui-react';
 
 
 import '../styles/header.css';
@@ -18,15 +18,21 @@ function LoginButton(props) {
 function LogoutButton(props) {
     return (
         <ul className="nav-right">
-            <li><a onClick={() => {localStorage.removeItem('token');window.location.reload()}}>Logout</a></li>
+            <li><a>{JSON.parse(localStorage.getItem('user')).nickname}</a></li>
+            <li><a onClick={() => {localStorage.removeItem('token');localStorage.removeItem('user');window.location.assign("/home")}}>Logout</a></li>
         </ul>
     );
 }
 
 export default class Header extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            user: {}
+        }
+    }
 
     render() {
-        console.log(localStorage.getItem('token'));
         let log = null;
         if (localStorage.getItem('token') != null) {
             log = <LogoutButton />;

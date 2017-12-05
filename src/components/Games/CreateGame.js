@@ -2,7 +2,7 @@ import React from 'react';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import { Redirect } from 'react-router'
-import { Checkbox, Dropdown, Input, Button, Icon, Grid } from 'semantic-ui-react';
+import { Dropdown, Input, Button, Icon, Grid } from 'semantic-ui-react';
 
 import 'react-datepicker/dist/react-datepicker.css';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import FontAwesome  from 'react-fontawesome';
+//import FontAwesome  from 'react-fontawesome';
 
 import '../../../styles/lobby-player.css';
 

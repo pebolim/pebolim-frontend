@@ -1,6 +1,5 @@
 import React from 'react';
-import Time from 'react-time-format'
-import { Input, Form, Dimmer, Loader, Grid, Image, Header, Label, Button } from 'semantic-ui-react'
+import { Input, Form, Dimmer, Loader, Grid, Image, Header, Button } from 'semantic-ui-react'
 import '../../styles/register.css'
 
 export default class Register extends React.Component {
@@ -38,7 +37,7 @@ export default class Register extends React.Component {
             ).then(function (data) {
                 localStorage.setItem('token', data.token);
                 window.location.assign("/player/games");
-            }.bind(this)
+            }
             ).catch(err => {
                 console.log(err);
             });

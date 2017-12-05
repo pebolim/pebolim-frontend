@@ -10,9 +10,11 @@ export default class PlayerLobby extends React.Component {
         var lobby_id = this.props.match.params.id;
 
         var user = {
-            id: 1,
-            image_url: "http://blog.opovo.com.br/portugalsempassaporte/wp-content/uploads/sites/42/2013/07/Scolari.jpg",
-            nickname: "yEPZ"
+            id:0,
+            email:'',
+            nickname:'',
+            age:0,
+            image_url:''
         };
 
         this.state = {
@@ -26,6 +28,17 @@ export default class PlayerLobby extends React.Component {
     }
 
     componentDidMount(){
+        var headers = new Headers({
+            "Authorization":localStorage.getItem("token"),
+            'Content-Type': 'application/json'
+        });
+        var myInit = {
+            method: 'GET',
+            headers: headers
+        }
+        fetch(`http://localhost:3000/player`,myInit)
+            .then(result => result.json())
+            .then(player => this.setState({ user: player.user },console.log(player.user)))
         this.getLobbyPlayers();
     }
 
