@@ -18,7 +18,7 @@ function LoginButton(props) {
 function LogoutButton(props) {
     return (
         <ul className="nav-right">
-            <li><a>{JSON.parse(localStorage.getItem('user')).nickname}</a></li>
+            <li><Link to='/user/details'>{JSON.parse(localStorage.getItem('user')).nickname}</Link></li>
             <li><a onClick={() => { localStorage.removeItem('token'); localStorage.removeItem('user'); window.location.assign("/home") }}>Logout</a></li>
         </ul>
     );

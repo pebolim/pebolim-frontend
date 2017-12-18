@@ -1,5 +1,7 @@
 import React from 'react';
+import { Redirect } from 'react-router';
 import { Form, Grid, Input,Image,Header,Button,Icon } from 'semantic-ui-react'
+
 import '../../styles/login.css'
 
 export default class Login extends React.Component {
@@ -8,7 +10,8 @@ export default class Login extends React.Component {
 
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      redirect: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -22,6 +25,9 @@ export default class Login extends React.Component {
   }
 
   handleSubmit(event) {
+    var self = this;
+    const { email, password } = this.state;
+
     event.preventDefault();
     var myHeaders = new Headers({
       'Content-Type': 'application/json',
@@ -30,20 +36,33 @@ export default class Login extends React.Component {
     fetch('http://127.0.0.1:3000/login', {
       method: 'POST',
       headers: myHeaders,
-      body: JSON.stringify(this.state)
-    }).then(response => response.json()
-      ).then(function (data) {
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('user',JSON.stringify(data.user));
-        window.location.assign("/player/games");
-      }
-      ).catch(err => {
+      body: JSON.stringify({
+          email:email,
+          password: password
+      })
+    })
+    .then(response => response.json())
+    .then(function (data) {
+        console.log(data)
+
+        if(data.status === 200){
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('user',JSON.stringify(data.user));
+          self.setState({ redirect: true })   
+        }         
+        //window.location.assign("/player/games");
+      }).catch(err => {
         console.log(err);
       });
-
   }
 
   render() {
+    const { redirect } = this.state;
+    
+    if (redirect) {
+        return <Redirect to="/home" />;
+    }
+     
     return (
         <Grid centered columns={3}>
           <Grid.Column>

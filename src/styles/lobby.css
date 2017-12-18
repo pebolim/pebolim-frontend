@@ -1,8 +1,4 @@
-.clear{
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 100%;
-}
+
 
 /*__________________ LOBBY LAYOUT___________________*/
 
@@ -37,8 +33,7 @@
 
 /*__________________ LOBBY SELECTION LAYOUT ___________________*/
 .team-red{
-    color:#FF3232;
-    height: 100%;
+    color:rgb(224, 52, 52);
 }
 
 .team-blue{

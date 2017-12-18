@@ -1,55 +1,64 @@
 import React from 'react';
+import { Redirect } from 'react-router';
 import Player from './Player';
-import '../../../styles/lobby.css';
 import { Grid } from 'semantic-ui-react';
 
+import '../../../styles/lobby.css';
+
 export default class PlayerLobby extends React.Component {
+    
     constructor(props) {
-        super(props)
-
-        var lobby_id = this.props.match.params.id;
-
-        var user = {
-            id:0,
-            email:'',
-            nickname:'',
-            age:0,
-            image_url:''
-        };
+        super(props);
 
         this.state = {
-            user: user,
-            lobby_id: lobby_id,
-            players: Array(4).fill(null)
+            user: null,
+            game_details: null,
+            lobby_id : this.props.match.params.id, 
+            players: Array(4).fill(null),
+            redirect: false
         };
 
+        this.redirectToGameView = this.redirectToGameView.bind(this); 
         this.handleJoinTeamClick = this.handleJoinTeamClick.bind(this);     
         this.sendPosition = this.sendPosition.bind(this);     
     }
 
+      
     componentDidMount(){
+        this.state.user = localStorage.getItem("user");
+        
         var headers = new Headers({
             "Authorization":localStorage.getItem("token"),
             'Content-Type': 'application/json'
         });
-        var myInit = {
-            method: 'GET',
-            headers: headers
-        }
-        fetch(`http://localhost:3000/player`,myInit)
-            .then(result => result.json())
-            .then(player => this.setState({ user: player.user },console.log(player.user)))
-        this.getLobbyPlayers();
+        this.getGameDetails(headers);
+        this.getLobbyPlayers(headers);
     }
 
-    getLobbyPlayers(){
-        fetch('http://127.0.0.1:3000/game/'+this.state.lobby_id+'/players')
+    getGameDetails(headers){
+        fetch(`http://localhost:3000/game/`+this.state.lobby_id,{
+            method: 'GET',
+            headers: headers
+        })
+        .then(result => result.json())
+        .then(game_details => {
+            this.setState({ game_details: game_details });
+            console.log(game_details);
+        })
+    }
+
+    getLobbyPlayers(headers){
+        fetch('http://127.0.0.1:3000/game/'+this.state.lobby_id+'/players',{
+            method: 'GET',
+            headers: headers
+        })
         .then(result=>result.json())
         .then(result=>{
             this.setState({players: result.players});
-            console.log(this.state.players[0])
+            console.log(this.state.players)
         })
     }
+
 
     changePosition(index){
         console.log(index)
@@ -72,7 +81,7 @@ export default class PlayerLobby extends React.Component {
 
     sendPosition(position) {   
         var self = this;
-        fetch('http://127.0.0.1:3000/game/join/'+self.state.lobby_id, {
+        fetch('http://127.0.0.1:3000/game/'+this.state.lobby_id+'/join', {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
@@ -98,7 +107,35 @@ export default class PlayerLobby extends React.Component {
         );
     }
 
+    redirectToGameView(){
+        //fazer update do jogo: colocar a hora de inicio, mudar o state do jogo para ingame, 
+        //colocar o lock em true(bloqueia mudanças no lobby)
+        var self = this;
+        fetch('http://127.0.0.1:3000/game/'+this.state.lobby_id+'/start', {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({user_id: self.state.user.id}) //state 2 -> in game
+        }).then(function(response){
+            return response.json();
+        }).then(function(data){
+            console.log(data)
+            //depois de feito faz redirect para a view do live game
+            if(data.status === 200)
+                self.setState({ redirect: true})   
+               
+        });   
+    }
+
     render() {
+        const { redirect } = this.state;
+        
+        if (redirect) {
+            return <Redirect to={"/game/"+this.state.lobby_id+"/live"} />;
+        }
+
         return ( 
             <Grid columns={2} className="lobby-container">
                 <Grid.Row stretched className="clear">

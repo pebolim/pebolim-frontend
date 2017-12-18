@@ -1,0 +1,283 @@
+.team-red{
+    color:rgb(224, 52, 52);
+}
+
+.team-blue{
+    color:#1C8BFF;
+}
+
+.game-container{
+    width: 100%;
+    min-height: 700px;
+    background-clip:content-box;
+}
+
+.game-main-box{
+    height: 100%;
+    padding: 0 15px 0 0 !important;
+}
+
+    .game-board{
+        position: relative;
+        height: 60%;
+    }
+
+        .game-board-container{
+            width:100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            margin-bottom: 15px;
+            background-color:rgba(28, 28, 28, 0.65);    
+        }
+
+            .game-board-content{
+                display: table;
+                width: 100%;
+                height: 100%;
+            }
+
+                .game-board-timer-box{
+                    height: 20%;
+                    display: block;
+                    position: relative;
+                    width: 100%;
+                }
+                    .game-board-timer-wrapper{
+                        position: absolute;
+                        left:50%;
+                        top:50%;
+                        transform: translate(-50%,-50%) !important;
+
+                        height: 100%;
+                        width: 20%;
+                        background-color: #1A1A1A;
+                        
+                    }
+
+                        .game-board-timer{
+                            position: absolute;
+                            font-family: 'Teko', sans-serif;
+                            font-weight: 300;
+                            font-size: 3em;
+                            padding-top:8px;
+                            
+                            left:50%;
+                            top:50%;
+                            transform: translate(-50%,-50%) !important;
+                        }
+
+                    .game-board-state-box{
+                        position: absolute;
+                        right: 0;
+                        transform: translateY(-50%) !important;
+                        top: 50%;
+                        background-color: #1A1A1A;
+                        border-radius: 5px !important;
+                        padding: 6px 15px;
+                        margin-right:5%;
+                    }
+                        .game-board-state{
+                            font-family: 'Nunito Sans', sans-serif;
+                            font-size: 1.1em;
+                            color: rgb(20, 235, 85);
+                            font-weight: 700;
+                        }
+                                  
+                .game-board-info-box{
+                    height: 80%;
+                    display: block;
+                    position: relative;
+                    width: 100%;
+                }  
+                    .game-board-team{
+                        width: 35%;
+                        height: 100%;
+                        position: relative;
+                        float: left;
+                    }
+                        .game-board-team-wrapper{
+                            position: absolute;
+                            left:50%;
+                            top:50%;
+                            transform: translate(-50%,-50%) !important;
+                        }
+                            .team-box{
+                                position: relative;
+                                height: 100%;
+                                width: 100%;
+                                display: block;   
+                            }
+        
+                            .team-image{
+                                background-size: cover !important;
+                                background-position: 50%;
+                                position: relative;
+                                height: 190px;
+                                width: 190px;
+                                margin: 0 auto;
+                                border: solid 2px #111 !important;
+                                border-radius: 4px !important;
+                            }
+                                .team-side{
+                                    width: 100%;
+                                    position: absolute;
+                                    top: 50%;
+                                    left:50%;
+                                    transform: translate(-50%,-50%) !important;
+                                
+                                    font-size: 2em;
+                                    font-family: 'Teko', sans-serif;
+                                    font-weight: 300;
+                                    text-transform: uppercase;
+                                }
+                            
+                            .team-name{
+                                height: 60px;
+                            }
+        
+                                .team-name > div{
+                                    color:#eee;
+                                    text-overflow: ellipsis;
+                                    text-align: center;
+                                    font-size: 1.2em;
+                                
+                                    position: relative;
+                                    top: 50%;
+                                    transform: translateY(-50%);
+                                }
+
+                    .game-board-result{
+                        width: 30%;
+                        height: 100%;
+                        position: relative;
+                        float: left;
+                        text-align: center;
+                    }    
+
+                        .game-results{
+                            height: 40%;
+                            display: block;
+                            position: relative;                   
+                        }
+                        .game-results > div{
+                            position: absolute;
+                            font-family: 'Teko', sans-serif;
+                            font-weight: 300;
+                            font-size: 5em;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            bottom: 20px;
+                            width: 100%;
+                        }
+                        
+                        .game-date{
+                            padding-top:10px;
+                            height: 15%;
+                            display: block;
+                            font-family: 'Nunito Sans', sans-serif;
+                        }
+                        .game-local{
+                            height: 10%;
+                            display: block;
+                            font-family: 'Nunito Sans', sans-serif;
+                        }
+                        
+                
+    .game-details{
+        background-color:rgba(28, 28, 28, 0.65);
+        height: 40%;
+        position: relative;
+    }
+
+        .game-details-title{
+            position: relative;
+            height: 20%;
+            width: 100%;
+            background-color: #1A1A1A;
+            
+        }
+
+            .game-details-title > div{
+                position: absolute;
+                font-family: 'Teko', sans-serif;
+                font-weight: 300;
+                font-size: 3em;
+                padding-top:8px;
+                
+                left:50%;
+                top:50%;
+                transform: translate(-50%,-50%) !important;
+            }
+
+        .game-details-container{
+            height: 80%;
+        }
+
+
+
+/*__________________ GAME ADMIN BOARD LAYOUT ___________________*/
+
+.game-control-box{
+    background-color:#1C1C1C;
+}
+
+.game-control-content{
+    overflow: hidden; 
+    height: 100%;
+}
+
+.game-control-title{
+    height: 20%;
+    position: relative;
+    color:rgb(0, 146, 93);
+    font-family: 'Teko', sans-serif;
+    font-weight: 300;
+    font-size: 3em;
+    white-space: nowrap;
+    text-transform: uppercase;
+}
+
+    .game-control-title > div{
+        position: absolute;
+        left:50%;
+        top:50%;
+        transform: translate(-50%,-50%) !important;
+    }
+
+.game-commands{
+    height: 60%;
+    position: relative;
+}
+    .game-commands > button {
+        
+    }
+
+.game-finish-button-wrapper{
+    height: 20%;
+    position: relative;
+    text-align: center;
+}
+
+    .game-finish-button{
+        background-color:#d33d3d;
+        color: #eee;
+        white-space: nowrap;
+        border-radius: 3px;
+        padding:12px 40px;
+        border: 2px solid #c52020;
+        text-transform: uppercase;
+        font-weight: 600;
+        transition: none 33ms cubic-bezier(.3,0,.7,1);
+        transition-property: all;
+        cursor: pointer;
+        outline: none;
+    }
+
+        .game-finish-button:hover{
+            transition: none 33ms cubic-bezier(.3,0,0,1);
+            transition-property: all;
+            transform: scale(1.06);
+            background-color:#db2525;
+        }
