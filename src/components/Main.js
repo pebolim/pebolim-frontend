@@ -9,6 +9,7 @@ import GamesByUser from './Games/GamesByUser';
 import PlayerLobby from './Games/Lobbys/PlayerLobby';
 import UserDetails from './User/UserDetails';
 import CreateTeam from './Teams/CreateTeam';
+import ListTeam from './Teams/ListTeams';
 
 export default class Main extends React.Component {
     render(){
@@ -23,6 +24,7 @@ export default class Main extends React.Component {
                 <Route path="/player/games" component={GamesByUser} />
                 <Route path="/user/details" component={UserDetails} />
                 <Route path="/team/create" component={CreateTeam} /> 
+                <Route path="/teams" component={ListTeam} /> 
             </Switch>           
         );
     }

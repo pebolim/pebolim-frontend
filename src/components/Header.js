@@ -49,7 +49,7 @@ export default class Header extends React.Component {
                                 </li>
                                 <li><Link to='/home'>Home</Link></li>
                                 <li><Link to='/game/create'>Create Game</Link></li>
-                                <li><Link to='/team/create'>Create Team</Link></li>
+                                <li><Link to='/teams'>Teams</Link></li>
                             </ul>
                             {log}
                         </div>
@@ -72,7 +72,7 @@ export default class Header extends React.Component {
                                             <Link to='/game/create' style={{cursor:"pointer"}}>Create Game</Link>
                                         </Menu.Item>
                                         <Menu.Item>
-                                            <Link to='/team/create' style={{cursor:"pointer"}}>Create Team</Link>
+                                            <Link to='/teams' style={{cursor:"pointer"}}>Teams</Link>
                                         </Menu.Item>
                                         <Menu.Item onClick={this.toggleVisibility}>
                                             <Icon name="close"/>
