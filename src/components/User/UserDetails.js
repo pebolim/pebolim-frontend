@@ -42,10 +42,10 @@ export default class UserDetails extends React.Component {
         } else {
             return (
                 <div>
-                    <Header id="title" style={{ textAlign: 'left', paddingBottom: 20, fontSize: 50 }}>{this.state.user.nickname}'s profile</Header>
+                    <Header id="title" style={{ textAlign: 'left', fontSize: 50 }}>{this.state.user.nickname}'s profile</Header>
                     <Grid>
                         <Grid.Column width={4} >
-                            <Grid.Column style={{ backgroundColor: '#353535', paddingTop: 15, paddingLeft: 10,paddingRight:10 }}>
+                            <Grid.Column style={{ backgroundColor: '#353535', paddingTop: 15, paddingLeft: 10, paddingRight: 10 }}>
                                 <Image src={require('../../assets/images/datboy.png')} centered />
                                 <div style={{ fontSize: 30, textAlign: 'center', fontWeight: 600, paddingTop: 10 }}>
                                     {this.state.user.nickname}
@@ -63,15 +63,23 @@ export default class UserDetails extends React.Component {
                                     {this.state.user.age}
                                 </Grid.Row>
                             </Grid.Column>
-                            <Button fluid>Change Profile</Button>
-                        </Grid.Column>
-                        <Grid.Column width={10}>
-                            <GamesByUser />
-                        </Grid.Column>
-                        <Grid.Column width={2}>
-                            <Grid.Column >
-                                <ListTeam />
+                            <Grid.Column>
+                                <Grid.Row>
+                                    <Button fluid style={{ marginTop: 10 }}>Change Profile</Button>
+                                </Grid.Row>
+                                <Grid.Row>
+                                    <Button.Group fluid style={{ marginTop: 10 }}>
+                                        <Button style={{ fontSize: 20 }}>My Teams</Button>
+                                        <Button style={{ fontSize: 20 }}>Create Team</Button>
+                                    </Button.Group>
+                                </Grid.Row>
+                                <Grid.Row>
+                                    <Button fluid style={{ marginTop: 10 }}>Check Stats</Button>
+                                </Grid.Row>
                             </Grid.Column>
+                        </Grid.Column>
+                        <Grid.Column width={12}>
+                            <GamesByUser />
                         </Grid.Column>
                     </Grid>
                 </div>
