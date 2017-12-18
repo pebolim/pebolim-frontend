@@ -72,8 +72,8 @@ export default class CreateGame extends React.Component {
         fetch('http://127.0.0.1:3000/game/', {
             method: 'POST',
             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
+                "Authorization":localStorage.getItem("token"),
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({game: this.state})
         }).then(function(response){
