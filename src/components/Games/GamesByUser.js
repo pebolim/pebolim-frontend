@@ -74,16 +74,16 @@ export default class Game extends React.Component {
         }else{
         return (
             <div>
-                <Header id="title" as="h1" textAlign="center">Jogos</Header>
+                <Header id="title" as="h1" textAlign="center" style={{paddingBottom: 10}}>Últimos Jogos</Header>
                 {
                     this.state.games.map((item, i) =>
                         (
-                            <Container key={i} style={{ borderLeft: item.is_winner ? '5px solid #00ff00' : '5px solid #ff0000', borderRight: !item.is_winner ? '5px solid #00ff00' : '5px solid #ff0000' }}>
+                            <Container fluid key={i} style={{ borderLeft: item.is_winner ? '5px solid #00ff00' : '5px solid #ff0000', borderRight: item.is_winner ? '5px solid #00ff00' : '5px solid #ff0000' }}>
                                 <Grid>
                                     <Grid.Row>
-                                        <Grid.Column width={5} textAlign="center">
+                                        <Grid.Column width={5} textAlign="center" >
                                             Data: <Time value={item.match_day} format="YYYY/MM/DD" />
-                                            <h2>{item.teams[0].name}</h2>
+                                            <h3>{item.teams[0].name}</h3>
                                         </Grid.Column>
                                         <Grid.Column width={6}>
                                             <Grid>
@@ -108,7 +108,7 @@ export default class Game extends React.Component {
                                         </Grid.Column>
                                         <Grid.Column width={5} textAlign="center">
                                             <span>Local: {item.local}</span>
-                                            <h2>{item.teams[1].name}</h2>
+                                            <h3>{item.teams[1].name}</h3>
                                         </Grid.Column>
                                     </Grid.Row>
                                 </Grid>

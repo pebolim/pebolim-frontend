@@ -48,9 +48,7 @@ export default class ListTeam extends React.Component {
                             <Grid.Column width={5} textAlign="center">
                                 <Link to='/team/create' style={{ cursor: "pointer" }}><Button>Create Team</Button></Link>
                             </Grid.Column>
-                            <Grid.Column width={5} textAlign="center">
-                                <Link to='/team/create' style={{ cursor: "pointer" }}><Button>Create Team</Button></Link>
-                            </Grid.Column>
+                           
                         </Grid.Row>
 
                         {this.state.teams.map((item, i) =>(
