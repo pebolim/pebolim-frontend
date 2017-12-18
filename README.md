@@ -1,5 +1,7 @@
 [![Dependency Status](https://beta.gemnasium.com/badges/github.com/pebolim/pebolim-frontend.svg)](https://beta.gemnasium.com/projects/github.com/pebolim/pebolim-frontend)
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/26ec470c839f33bfe849/maintainability)](https://codeclimate.com/github/pebolim/pebolim-frontend/maintainability)
+
 # pebolim-frontend
 
 Ruby on Rails &amp; React - Software Engineering Project
