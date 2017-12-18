@@ -49,7 +49,7 @@ export default class ListTeam extends React.Component {
                                 <Link to='/team/create' style={{ cursor: "pointer" }}><Button>Create Team</Button></Link>
                             </Grid.Column>
                             <Grid.Column width={5} textAlign="center">
-                                <Link to='/team/create' style={{ cursor: "pointer" }}><Button>Create Team</Button></Link>
+                                <Link to='/team/join' style={{ cursor: "pointer" }}><Button>Pendent Requests</Button></Link>
                             </Grid.Column>
                         </Grid.Row>
 
