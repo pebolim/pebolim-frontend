@@ -1,7 +1,8 @@
 import React from 'react';
 import Time from 'react-time-format';
-import { Container, Header, Grid, Image, Label, Icon, Loader, Dimmer } from 'semantic-ui-react';
+import { Container, Header, Grid, Image, Label, Icon, Loader, Dimmer, Button } from 'semantic-ui-react';
 import GamesByUser from '../Games/GamesByUser'
+import ListTeam from '../Teams/ListTeams'
 
 export default class UserDetails extends React.Component {
     constructor(props) {
@@ -26,7 +27,7 @@ export default class UserDetails extends React.Component {
         fetch(`http://localhost:3000/player`, myInit)
             .then(result => result.json())
             .then(usr => this.setState({ user: usr.user }))
-        this.setState({loading:false})
+        this.setState({ loading: false })
 
     }
 
@@ -43,28 +44,34 @@ export default class UserDetails extends React.Component {
                 <div>
                     <Header id="title" style={{ textAlign: 'left', paddingBottom: 20, fontSize: 50 }}>{this.state.user.nickname}'s profile</Header>
                     <Grid>
-                        <Grid.Column width={4} style={{ backgroundColor: '#353535' }}>
-                            <Image src={require('../../assets/images/datboy.png')} centered />
-                            <div style={{ fontSize: 30, textAlign: 'center', fontWeight: 600, paddingTop: 10 }}>
-                                {this.state.user.nickname}
-                            </div>
-                        </Grid.Column>
-                        <Grid.Column width={4} style={{ paddingLeft: 30 }}>
-                            <Grid.Row style={{ fontSize: 25, fontWeight: 600, paddingBottom: 10 }}>
-                                Email:
-                        </Grid.Row>
-                            <Grid.Row style={{ fontSize: 18, paddingBottom: 30, paddingLeft: 5 }}>
-                                {this.state.user.email}
+                        <Grid.Column width={4} >
+                            <Grid.Column style={{ backgroundColor: '#353535', paddingTop: 15, paddingLeft: 10,paddingRight:10 }}>
+                                <Image src={require('../../assets/images/datboy.png')} centered />
+                                <div style={{ fontSize: 30, textAlign: 'center', fontWeight: 600, paddingTop: 10 }}>
+                                    {this.state.user.nickname}
+                                </div>
+                                <Grid.Row style={{ fontSize: 16, fontWeight: 600, paddingBottom: 10, paddingTop: 15 }}>
+                                    Email:
                             </Grid.Row>
-                            <Grid.Row style={{ fontSize: 25, fontWeight: 600, paddingBottom: 10 }}>
-                                Age:
-                        </Grid.Row>
-                            <Grid.Row style={{ fontSize: 18, paddingBottom: 30, paddingLeft: 5 }}>
-                                {this.state.user.age}
+                                <Grid.Row style={{ fontSize: 20, paddingBottom: 15, paddingLeft: 5 }}>
+                                    {this.state.user.email}
+                                </Grid.Row>
+                                <Grid.Row style={{ fontSize: 16, fontWeight: 600, paddingBottom: 10 }}>
+                                    Age:
                             </Grid.Row>
+                                <Grid.Row style={{ fontSize: 20, paddingBottom: 15, paddingLeft: 5 }}>
+                                    {this.state.user.age}
+                                </Grid.Row>
+                            </Grid.Column>
+                            <Button fluid>Change Profile</Button>
                         </Grid.Column>
-                        <Grid.Column width={8}>
+                        <Grid.Column width={10}>
                             <GamesByUser />
+                        </Grid.Column>
+                        <Grid.Column width={2}>
+                            <Grid.Column >
+                                <ListTeam />
+                            </Grid.Column>
                         </Grid.Column>
                     </Grid>
                 </div>
