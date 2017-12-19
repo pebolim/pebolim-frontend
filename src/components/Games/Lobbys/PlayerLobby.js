@@ -25,8 +25,8 @@ export default class PlayerLobby extends React.Component {
 
       
     componentDidMount(){
-        this.state.user = localStorage.getItem("user");
-        
+        this.state.user = JSON.parse(localStorage.getItem("user"));
+        //console.log(this.state)
         var headers = new Headers({
             "Authorization":localStorage.getItem("token"),
             'Content-Type': 'application/json'
@@ -42,8 +42,10 @@ export default class PlayerLobby extends React.Component {
         })
         .then(result => result.json())
         .then(game_details => {
-            this.setState({ game_details: game_details });
-            console.log(game_details);
+            console.log(game_details)
+            if(game_details.status === 200)
+                this.setState({ game_details: game_details.game });
+    
         })
     }
 
@@ -54,14 +56,25 @@ export default class PlayerLobby extends React.Component {
         })
         .then(result=>result.json())
         .then(result=>{
-            this.setState({players: result.players});
-            console.log(this.state.players)
+            //console.log(result.teams)
+            var players = this.state.players.slice();
+            players = [];
+            if(result.status === 200)
+                result.teams.forEach( team => {
+                    console.log(team)
+                    if(team.players != null)
+                        team.players.forEach(player => {
+                            players.push(player);
+                        });
+                });
+            this.state.players = players; 
+            console.log(this.state.players)  
         })
     }
 
 
     changePosition(index){
-        console.log(index)
+        //console.log(index)
         var elements = this.state.players;
         for(let i =0; i< elements.length; i++){
             if(elements[i] != null && elements[i].id === this.state.user.id)
@@ -74,20 +87,21 @@ export default class PlayerLobby extends React.Component {
         console.log(this.state.players)
     }   
 
-    handleJoinTeamClick(i){   
-        if(this.state.players[i] == null)
-            this.sendPosition(i);
+    handleJoinTeamClick(position, team){   
+        console.log(position, team)
+        if(this.state.players[position] == null)
+            this.sendPosition(position, team);
     }
 
-    sendPosition(position) {   
+    sendPosition(position, team) {   
         var self = this;
         fetch('http://127.0.0.1:3000/game/'+this.state.lobby_id+'/join', {
             method: 'PUT',
             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
+                "Authorization":localStorage.getItem("token"),
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify({user_id: self.state.user.id, position: position})
+            body: JSON.stringify({user_id: self.state.user.id, teamid: team})
         }).then(function(response){
             return response.json();
         }).then(function(body){
@@ -98,11 +112,11 @@ export default class PlayerLobby extends React.Component {
         });
     }
 
-    renderPlayer(index){
+    renderPlayer(position, team){
         return(
-            <Player position={index+1} 
-                player={this.state.players[index]} 
-                onClick={() => this.handleJoinTeamClick(index)}
+            <Player position={position+1} 
+                player={this.state.players[position]} 
+                onClick={() => this.handleJoinTeamClick(position, team)}
             />                           
         );
     }
@@ -114,8 +128,8 @@ export default class PlayerLobby extends React.Component {
         fetch('http://127.0.0.1:3000/game/'+this.state.lobby_id+'/start', {
             method: 'PUT',
             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
+                "Authorization":localStorage.getItem("token"),
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({user_id: self.state.user.id}) //state 2 -> in game
         }).then(function(response){
@@ -130,7 +144,7 @@ export default class PlayerLobby extends React.Component {
     }
 
     render() {
-        const { redirect } = this.state;
+        const { redirect, game_details } = this.state;
         
         if (redirect) {
             return <Redirect to={"/game/"+this.state.lobby_id+"/live"} />;
@@ -146,10 +160,10 @@ export default class PlayerLobby extends React.Component {
                                     <div className="team-box">
                                         <div className="header"><div>RED TEAM</div></div>
                                         <div className="attacker">
-                                            {this.renderPlayer(0)}                                       
+                                            {game_details && this.renderPlayer(0, game_details.teams[0].id)}                                 
                                         </div>   
                                         <div className="defender">
-                                            {this.renderPlayer(1)}  
+                                            {game_details && this.renderPlayer(1, game_details.teams[0].id)}
                                         </div>
                                     </div>                                   
                                 </Grid.Column>
@@ -171,10 +185,10 @@ export default class PlayerLobby extends React.Component {
                                     <div className="team-box">
                                         <div className="header"><div>BLUE TEAM</div></div>
                                         <div className="attacker">
-                                            {this.renderPlayer(2)}                                      
+                                            {game_details && this.renderPlayer(2, game_details.teams[1].id)}                                    
                                         </div>   
                                         <div className="defender">
-                                            {this.renderPlayer(3)}  
+                                            {game_details && this.renderPlayer(3, game_details.teams[1].id)}
                                         </div>
                                     </div> 
                                 </Grid.Column>
