@@ -10,17 +10,22 @@ export default class Stopwatch extends React.Component {
     constructor(props) {
         super(props);
 
-        var start_time = parseInt((((new Date().getTime()+ 1*60*1000) - props.start_time) /1000).toFixed(0));
-        // console.log("now: "+new Date().getTime()+ ", prop: "+ props.start_time +" Total= "+x)
         this.state = { 
-            secondsElapsed: start_time, 
+            secondsElapsed: 0, 
             laps: [],
             lastClearedIncrementer: null
         };
-        this.incrementer = null;
-        this.handleStartClick();
+        this.incrementer = null;     
     }  
     
+    componentWillReceiveProps(nextProps){
+        if(nextProps.start_time != null){         
+            var start_time = parseInt(((new Date()- new Date(nextProps.start_time)) /1000).toFixed(0));
+            this.setState({secondsElapsed: start_time});
+            this.handleStartClick();
+        }       
+    }
+
     handleStartClick() {
         this.incrementer = setInterval( () =>
             this.setState({
