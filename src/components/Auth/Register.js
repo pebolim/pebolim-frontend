@@ -11,6 +11,7 @@ export default class Register extends React.Component {
             password: '',
             nickname: '',
             age: 0,
+            image_url: 'creatorImage.png',
             loading: false
         };
 
