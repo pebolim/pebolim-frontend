@@ -50,25 +50,24 @@ export default class PlayerLobby extends React.Component {
     }
 
     getLobbyPlayers(headers){
+        var self = this;
+
         fetch('http://127.0.0.1:3000/game/'+this.state.lobby_id+'/players',{
             method: 'GET',
             headers: headers
         })
         .then(result=>result.json())
         .then(result=>{
-            //console.log(result.teams)
-            var players = this.state.players.slice();
-            players = [];
+            var players = [];
             if(result.status === 200)
                 result.teams.forEach( team => {
                     console.log(team)
-                    if(team.players != null)
-                        team.players.forEach(player => {
-                            players.push(player);
-                        });
+                    if(team.players != null){
+                        for(let i=0;i<2; i++)
+                            players.push(team.players[i]);
+                    }
                 });
-            this.state.players = players; 
-            console.log(this.state.players)  
+                this.setState({ players: players }); 
         })
     }
 
@@ -88,7 +87,6 @@ export default class PlayerLobby extends React.Component {
     }   
 
     handleJoinTeamClick(position, team){   
-        console.log(position, team)
         if(this.state.players[position] == null)
             this.sendPosition(position, team);
     }
@@ -144,7 +142,7 @@ export default class PlayerLobby extends React.Component {
     }
 
     render() {
-        const { redirect, game_details } = this.state;
+        const { redirect, game_details, players } = this.state;
         
         if (redirect) {
             return <Redirect to={"/game/"+this.state.lobby_id+"/live"} />;
