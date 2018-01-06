@@ -37,8 +37,8 @@
 
 
 .join-icon{
-    width: 75px;
-    height: 75px;  
+    width: 40%;
+    height: 40%;  
     
     position: absolute;
     top: 50%;
@@ -46,13 +46,13 @@
     transform: translateY(-50%) translateX(-50%) !important;
 
     cursor: pointer;
-    transition: none 33ms cubic-bezier(.3,0,.7,1);
+    transition: width 0.3s, height 0.3s;
     transition-property: all;
 }
 
     .join-icon:hover{
-        width: 82px;
-        height: 82px;
+        width: 55%;
+        height: 55%;
     }
 
 .player-name{

@@ -45,6 +45,7 @@
     padding: 0 20px;
     text-align: center;
     height: 100%;
+    position: relative;
 }
 
 .header{
@@ -59,7 +60,7 @@
         transform: translateY(-50%);
     }
 
-.attacker, .defender{
+.player{
     height: 40%;
 }
 
@@ -72,36 +73,32 @@
 /*__________________ LOBBY SELECTION DETAILS LAYOUT ___________________*/
 .versus{
     height: 10%;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%) !important;
+    font-weight: 700;
+    color:rgb(0, 146, 93);
+    font-size:4em;
+    position: absolute;
 }
-    .versus > div{
-        font-weight: 700;
-        color:rgb(0, 146, 93);
-        font-size:4em;
-    }
-.attacker-tag{
-    height: 45%;
-}
-    .attacker-tag > div{
-        
-    }
-.defender-tag{
-    height: 45%;
-}
-   .defender-tag > div{
-        
-    }
+
 
 /*__________________ LOBBY SELECTION DETAILS LAYOUT END ___________________*/
 
 /*__________________ LOBBY INFO LAYOUT ___________________*/
-.lobby-info{
-    overflow: hidden; 
-    padding: 0 20px;
-    height: 100%;
+.lobby-info-lock{
+    height: 3%;
+    position: relative;
 }
 
-.lobby-info-title{ 
-    height: 20%;
+.lobby-info-lock > i{
+    position: absolute;
+    right: 1%;
+    top: 50%;
+}
+
+.lobby-info-title{
+    height: 17%;
     position: relative;
     color:rgb(0, 146, 93);
     font-family: 'Teko', sans-serif;
@@ -111,7 +108,7 @@
     text-transform: uppercase;
 }
 
-.lobby-info-title > div{
+.lobby-info-title > h2{
     position: absolute;
     left:50%;
     top:50%;
@@ -120,6 +117,7 @@
 
 .lobby-info {
     height: 60%;
+    padding: 0 20px;
     position: relative;
 }
 
@@ -138,17 +136,27 @@
     border: 2px solid #00FFA2;
     text-transform: uppercase;
     font-weight: 500;
-    transition: none 33ms cubic-bezier(.3,0,.7,1);
+    transition: width 0.3s, height 0.3s;
     transition-property: all;
     cursor: pointer;
     outline: none;
 }
 
-    .lobby-begin-button:hover{
-        transition: none 33ms cubic-bezier(.3,0,0,1);
-        transition-property: all;
+    .lobby-begin-button:hover:enabled{
         transform: scale(1.06);
         background-color:rgb(0, 141, 89);
     }
 
+    .lobby-begin-button:disabled{
+        background-color:rgba(28, 255, 160, 0.13);
+        color: rgb(76, 141, 116);
+        transition: none;
+        cursor: default;
+    }
+
+.lobby-info-text{
+    font-weight: 150;
+    font-size: 2em;
+    color:rgb(0, 141, 89);
+}
 /*__________________ LOBBY INFO LAYOUT ___________________*/

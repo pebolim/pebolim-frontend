@@ -17,7 +17,8 @@ export default class CreateGame extends React.Component {
             minutes: '',
             start_date: moment(),
             redirect: false,
-            lobby_id: null
+            lobby_id: null,
+            to_teams: ''
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -29,24 +30,12 @@ export default class CreateGame extends React.Component {
 
     handleTimeHours(e, data) {
         e.preventDefault();
-        this.setState(
-            {
-                hour: data.value
-            }, function () {
-                console.log("State:" + this.state.hour);
-            }.bind(this)
-        );
+        this.setState({ hour: data.value });
     }
 
     handleTimeMinutes(e, data) {
         e.preventDefault();
-        this.setState(
-            {
-                minutes: data.value
-            }, function () {
-                console.log("State:" + this.state.hour);
-            }.bind(this)
-        );
+        this.setState({ minutes: data.value });
     }
 
     handleInputChange(event) {
@@ -54,9 +43,7 @@ export default class CreateGame extends React.Component {
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
 
-        this.setState({
-            [name]: value
-        });
+        this.setState({[name]: value}, function(){console.log(this.state)}.bind(this));
     }
 
     handleChange(date) {
@@ -67,56 +54,55 @@ export default class CreateGame extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        console.log(JSON.stringify(this.state));
-        var self = this;
+        console.log(JSON.stringify({ game: this.state }))
         fetch('http://127.0.0.1:3000/game/', {
             method: 'POST',
             headers: {
-                "Authorization":localStorage.getItem("token"),
+                "Authorization": localStorage.getItem("token"),
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({game: this.state})
-        }).then(function(response){
+            body: JSON.stringify({ game: this.state })
+        }).then(response => {
             return response.json();
-        }).then(function(body){
+        }).then(body => {
             console.log(body)
-            if(body.status === 201)
-                self.setState({ redirect: true, lobby_id: body.url_id })    
-               
+            if (body.status === 201)
+                this.setState({ redirect: true, lobby_id: body.url_id })
+
         });
     }
 
     render() {
 
         const { redirect, lobby_id } = this.state;
-        
+
         if (redirect) {
-            return <Redirect to={"/game/"+lobby_id+"/lobby"} />;
+            return <Redirect to={"/game/" + lobby_id + "/lobby"} />;
         }
-         
+
         return (
             <div>
                 <Grid>
                     <Grid.Row>
-                        <h1>Criar Jogo</h1>
+                        <h1>New Game</h1>
                     </Grid.Row>
-                    <Grid.Row columns='equal'>
-                        <Grid.Column>
+                    <Grid.Row columns={9}>
+                        <Grid.Column width={3}>
                             <div>
-                                <h3>Localização: </h3>
+                                <h3>Location: </h3>
                             </div>
                         </Grid.Column>
-                        <Grid.Column width={14}>
-                            <Input fluid value={this.state.local} name="local" onChange={this.handleInputChange} icon='marker' placeholder='Localização do jogo...' />
+                        <Grid.Column width={6}>
+                            <Input fluid value={this.state.local} name="local" onChange={this.handleInputChange} icon='marker' placeholder='Game location...' />
                         </Grid.Column>
                     </Grid.Row>
-                    <Grid.Row columns={8}>
-                        <Grid.Column>
+                    <Grid.Row columns={9}>
+                        <Grid.Column width={3}>
                             <div>
-                                <h3>Data do jogo: </h3>
+                                <h3>Game day: </h3>
                             </div>
                         </Grid.Column>
-                        <Grid.Column>
+                        <Grid.Column width={6}>
                             <DatePicker
                                 selected={this.state.start_date}
                                 onChange={this.handleChange}
@@ -124,28 +110,39 @@ export default class CreateGame extends React.Component {
                             />
                         </Grid.Column>
                     </Grid.Row>
-                    <Grid.Row columns={8}>
-                        <Grid.Column>
+                    <Grid.Row columns={9}>
+                        <Grid.Column width={3}>
                             <div>
-                                <h3>Hora do jogo: </h3>
+                                <h3>Game hour: </h3>
                             </div>
                         </Grid.Column>
-                        <Grid.Column>
-                            <Dropdown fluid value={this.state.hour} name="hour" onChange={this.handleTimeHours} placeholder='Horas' selection options={getHours()} />
+                        <Grid.Column width={3}>
+                            <Dropdown fluid value={this.state.hour} name="hour" onChange={this.handleTimeHours} placeholder='hour' selection options={getHours()} />
                         </Grid.Column>
-                        <Grid.Column>
-                            <Dropdown fluid value={this.state.minutes} name="minutes" onChange={this.handleTimeMinutes} placeholder='Minutos' selection options={getMinutes()} />
+                        <Grid.Column width={3}>
+                            <Dropdown fluid value={this.state.minutes} name="minutes" onChange={this.handleTimeMinutes} placeholder='minute' selection options={getMinutes()} />
                         </Grid.Column>
                     </Grid.Row>
                     <Grid.Row>
-                        <Grid.Column>
+                        <Grid.Column width={3}>
                             <div>
-                                <h3>Privado: </h3>
+                                <h3>Private: </h3>
                             </div>
                         </Grid.Column>
-                        <Grid.Column>
+                        <Grid.Column width={2}>
                             <div className="ui fitted toggle checkbox">
                                 <input type="checkbox" name="is_private" onChange={this.handleInputChange} readOnly="" tabIndex="0" />
+                                <label></label>
+                            </div>
+                        </Grid.Column>
+                        <Grid.Column width={3}>
+                            <div>
+                                <h3>Only to teams: </h3>
+                            </div>
+                        </Grid.Column>
+                        <Grid.Column width={1}>
+                            <div className="ui fitted toggle checkbox">
+                                <input type="checkbox" name="to_teams" onChange={this.handleInputChange} readOnly="" tabIndex="0" />
                                 <label></label>
                             </div>
                         </Grid.Column>
