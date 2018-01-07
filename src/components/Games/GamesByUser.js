@@ -16,12 +16,12 @@ export default class Game extends React.Component {
         };
 
         this.handleItemClick = (e, { name }) => {
-            this.setState({ activeItem: name })
-            return this.componentDidMount();
+            this.setState((state) => ({activeItem: name, loading:true }))
+            return this.getInfoPage(name)
         }
     }
 
-    componentWillMount(){
+    getPages(){
         var headers = new Headers({
             "Authorization":localStorage.getItem("token"),
             'Content-Type': 'application/json'
@@ -34,37 +34,8 @@ export default class Game extends React.Component {
             .then(result => result.json())
             .then(page => this.setState({nPages: page.nPages}))
     }
-    componentDidMount() {
-       /*let gms = [];
-        for (var i = 1; i < 51; i++) {
-            var res1 = Math.floor((Math.random() * 10) + 1);
-            var res2 = Math.floor((Math.random() * 10) + 1);
-            var myTeam1 = "MyTeam"
-            var myTeam2 = "Team2"
-            var w = false;
-            if (Math.random() >= 0.5) {
-                myTeam1 = "Team2";
-                myTeam2 = "MyTeam"
-            }
-            if ((myTeam1.includes("MyTeam") && res1 > res2) || (myTeam2.includes("MyTeam") && res2 > res1)) {
-                w = true
-            }
-            gms.push({
-                id: i,
-                match_day: "2013-6-9",
-                local: "IPT",
-                result1: res1,
-                result2: res2,
-                teams: [
-                    myTeam1,
-                    myTeam2
-                ],
-                winner: w
-            })
 
-        }
-        this.setState({ games: gms })*/
-
+    getInfoPage(nPage){
         var headers = new Headers({
             "Authorization":localStorage.getItem("token"),
             'Content-Type': 'application/json'
@@ -73,14 +44,14 @@ export default class Game extends React.Component {
             method: 'GET',
             headers: headers
         }
-        fetch(`http://localhost:3000/player/games/`+this.state.activeItem,myInit)
+        fetch(`http://localhost:3000/player/games/`+nPage,myInit)
             .then(result => result.json())
-            .then(gms => this.setState({ games: gms.games }))
-        this.setState({loading:false})
+            .then(gms => this.setState({ games: gms.games, loading:false }))
     }
 
-    componentWillUpdate(){
-        
+    componentWillMount() {
+        this.getPages();
+        this.getInfoPage(this.state.activeItem)
     }
 
     render() {
