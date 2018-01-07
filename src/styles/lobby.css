@@ -1,5 +1,3 @@
-
-
 /*__________________ LOBBY LAYOUT___________________*/
 
 .lobby-container{
@@ -7,40 +5,34 @@
     min-height: 600px;
     background-color:#1C1C1C;
     background-clip:content-box;
+    position: relative;
 }
 
 .lobby-selection-box{
     height: 100%;
-    padding: 0 !important;
+    position: absolute;
+    padding: 0 0 0 3% !important;
+    width: 100%;
 }
-    .lobby-selection-columns > div{
-        box-sizing : border-box;
-        height: 100%;
-        padding: 0 !important;
-        background-color:#292929;
-    }
 
-    .lobby-selection-details{
-        background-color: #1C1C1C !important;
-    }
-
-.lobby-details-box{
-    position: relative;
+.lobby-selection-columns > div{
+    box-sizing : border-box;
     height: 100%;
-
+    padding: 0 !important;
+    background-color:#292929;
 }
 /*__________________ LOBBY LAYOUT END ___________________*/
 
 /*__________________ LOBBY SELECTION LAYOUT ___________________*/
-.team-red{
+.loby-team-red{
     color:rgb(224, 52, 52);
 }
 
-.team-blue{
+.loby-team-blue{
     color:#1C8BFF;
 }
 
-.team-box{
+.loby-team-box{
     overflow: hidden; 
     padding: 0 20px;
     text-align: center;
@@ -48,30 +40,26 @@
     position: relative;
 }
 
-.header{
-    height: 10%;   
+.loby-header{
+    height: 20%;   
     font-size: 3em;
     font-family: 'Teko', sans-serif;
     font-weight: 600;
 }
-    .header > div{
+    .loby-header > div{
         position: relative;
         top: 50%;
         transform: translateY(-50%);
     }
 
-.player{
+.loby-player{
     height: 40%;
-}
-
-.empty{
-    height: 10%;
 }
 /*__________________ LOBBY SELECTION LAYOUT END ___________________*/
 
 
 /*__________________ LOBBY SELECTION DETAILS LAYOUT ___________________*/
-.versus{
+.loby-versus{
     height: 10%;
     top: 50%;
     left: 50%;
@@ -122,7 +110,7 @@
 }
 
 .lobby-begin-button-wrapper{
-    height: 20%;
+    height: 10%;
     position: relative;
     text-align: center;
 }

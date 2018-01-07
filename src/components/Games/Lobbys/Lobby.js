@@ -16,10 +16,12 @@ export default class Lobby extends React.Component {
             user: JSON.parse(localStorage.getItem("user")),
             game_details: null,
             lobby_id: this.props.match.params.id,
-            red_team: null,
-            blue_team: null,
+            red_team: [],
+            blue_team: [],
             load: 0,
-            redirect: false
+            redirect: false,
+            my_team: -1,
+            message: ""
         };
 
         this.redirectToGameView = this.redirectToGameView.bind(this);
@@ -46,16 +48,38 @@ export default class Lobby extends React.Component {
                         red_team: result.teams[0],
                         blue_team: result.teams[1]
                     });
+                    this.set_team();
                 } else {
-                    this.setState({ game_details: result.message });
+                    this.setState({ message: result.message });
                 }
                 this.setState({ load: result.status });
-                console.log(this.state)
             })
     }
 
+    set_team() {
+        let flag = true;
+        if (this.state.red_team!==undefined)
+            this.state.red_team.players.forEach(player => {
+                if (player.id === this.state.user.id) {
+                    this.setState({ my_team: 0 });
+                    flag = false;
+                }
+            });
+        if (this.state.blue_team!== undefined)
+            if (flag) {
+                this.state.blue_team.players.forEach(player => {
+                    if (player.id === this.state.user.id)
+                        this.setState({ my_team: 1 });
+                });
+            }
+    }
+
     render_start_button() {
-        if (this.state.user.id == this.state.game_details.owner_id) {
+        if (
+            this.state.user.id == this.state.game_details.owner_id &&
+            this.state.red_team!==undefined &&
+            this.state.blue_team!==undefined
+        ) {
             if (this.state.blue_team.players.length === 2 && this.state.red_team.players.length === 2) {
                 return (<button className="lobby-begin-button" onClick={this.redirectToGameView}>Start Game</button>);
             }
@@ -85,7 +109,7 @@ export default class Lobby extends React.Component {
     }
 
     render() {
-        const { redirect, load, game_details } = this.state;
+        const { redirect, load, game_details, message } = this.state;
 
         if (redirect) {
             return <Redirect to={"/game/" + this.state.lobby_id + "/live"} />;
@@ -93,27 +117,28 @@ export default class Lobby extends React.Component {
         if (load == 0) {
             return (<div>LOADING</div>);
         } if (load != 200) {
-            return (<div>Error mensage</div>);
+            return (<div><h2>ERROR</h2><h4>{message}</h4></div>);
         }
 
         const state_to_send = {
             user: this.state.user,
-            lobby_id:this.state.lobby_id,
+            lobby_id: this.state.lobby_id,
             red_team: this.state.red_team,
             blue_team: this.state.blue_team,
             redirect: false,
+            my_team: this.state.my_team
         }
 
         return (
             <Grid columns={2} className="lobby-container">
-                <Grid.Row stretched className="clear">
+                <Grid.Row stretched>
                     <Grid.Column width={12} className="lobby-selection-box">
 
                         {!game_details.to_teams && <PlayerLobby state={state_to_send} />}
                         {game_details.to_teams && <TeamLobby state={state_to_send} />}
 
                     </Grid.Column>
-                    <Grid.Column width={4} className="lobby-info-box">
+                    <Grid.Column width={4}>
                         <div className="lobby-info-lock">
                             {game_details.is_private && <Icon name='lock' />}
                             {!game_details.is_private && <Icon name='unlock' />}

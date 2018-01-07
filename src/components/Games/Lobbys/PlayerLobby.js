@@ -18,93 +18,119 @@ export default class PlayerLobby extends React.Component {
         if (team_ref === 1)
             return (
                 <Player player={this.state.red_team.players[player_ref]}
-                    onClick={() => this.sendPosition(this.state.red_team.id)}
+                    onClick={() => this.sendPosition(this.state.red_team.id, 0)}
                 />
             );
         else
             return (
                 <Player player={this.state.blue_team.players[player_ref]}
-                    onClick={() => this.sendPosition(this.state.blue_team.id)}
+                    onClick={() => this.sendPosition(this.state.blue_team.id, 1)}
                 />
             );
     }
 
-    sendPosition(team_id) {
-        fetch('http://127.0.0.1:3000/game/' + this.state.lobby_id + '/join', {
-            method: 'PUT',
-            headers: {
-                "Authorization": localStorage.getItem("token"),
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ user_id: this.state.user.id, teamid: team_id })
-        })
-            .then(res => res.json())
-            .then(result => {
-                console.log(result)
-                if (result.status === 200)
-                    this.changeTeam(team_id)
-            });
+    sendPosition(team_id, team) {
+        if (this.state.my_team == team) {
+            fetch('http://127.0.0.1:3000/game/' + this.state.lobby_id + '/leaveuser', {
+                method: 'PUT',
+                headers: {
+                    "Authorization": localStorage.getItem("token"),
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ user_id: this.state.user.id, teamid: team_id })
+            })
+                .then(res => res.json())
+                .then(result => {
+                    if (result.status === 200)
+                        this.leaveTeam(team)
+                });
+        } else {
+            fetch('http://127.0.0.1:3000/game/' + this.state.lobby_id + '/joinuser', {
+                method: 'PUT',
+                headers: {
+                    "Authorization": localStorage.getItem("token"),
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ user_id: this.state.user.id, teamid: team_id })
+            })
+                .then(res => res.json())
+                .then(result => {
+                    if (result.status === 200)
+                        this.changeTeam(team)
+                });
+        }
     }
 
-    changeTeam(team_id) {
-        //console.log(index)
-        if (this.state.red_team.id === team_id) {
-            let flag = true;
-            this.state.red_team.players.forEach(player => {
-                if (player.id === this.state.user.id) flag = false;
+    leaveTeam(team){
+        if (team===0) {
+            this.state.red_team.players.forEach((player, index, object) => {
+                if (player.id === this.state.user.id) object.splice(index, 1);
             });
-            if (flag) {
+        }else{
+            this.state.blue_team.players.forEach((player, index, object) => {
+                if (player.id === this.state.user.id) object.splice(index, 1);
+            });
+        }
+        this.setState({ my_team: -1 });
+        this.forceUpdate();
+    }
+
+    changeTeam(team) {
+        if (team===0) {
+            if (this.state.my_team === 1) {
                 this.state.blue_team.players.forEach((player, index, object) => {
                     if (player.id === this.state.user.id) object.splice(index, 1);
                 });
-                this.state.red_team.players.push(this.state.user);
             }
+            this.state.red_team.players.push(this.state.user);
+            this.setState({ my_team: 0 });
         } else {
-            let flag = true;
-            this.state.blue_team.players.forEach(player => {
-                if (player.id === this.state.user.id) flag = false;
-            });
-            if (flag) {
+            if (this.state.my_team === 0) {
                 this.state.red_team.players.forEach((player, index, object) => {
                     if (player.id === this.state.user.id) object.splice(index, 1);
                 });
-                this.state.blue_team.players.push(this.state.user);
             }
+            this.state.blue_team.players.push(this.state.user);
+            this.setState({ my_team: 1 });
         }
         this.forceUpdate();
     }
 
     render() {
-        const { red_team, blue_team } = this.state;
+        const { red_team, blue_team, my_team } = this.state;
 
         return (
-            <Grid columns={3} className="clear">
-                <Grid.Row stretched className="clear lobby-selection-columns">
-                    <Grid.Column width={6} className="team-red">
-                        <div className="team-box">
-                            <div className="header"><div>RED TEAM</div></div>
-                            <div className="player">
+            <Grid columns={3}>
+                <Grid.Row stretched className="lobby-selection-columns">
+                    <Grid.Column width={6}>
+                        <div className="loby-team-box">
+                            <div className="loby-header team-red"><div>RED TEAM</div></div>
+                            <div className="loby-player">
                                 {this.render_player(1, 0)}
                             </div>
-                            <div className="player">
-                                {this.render_player(1, 1)}
-                            </div>
+                            {(red_team.players.length == 2 || (red_team.players.length > 0 && my_team != 0)) &&
+                                <div className="loby-player">
+                                    {this.render_player(1, 1)}
+                                </div>
+                            }
                         </div>
                     </Grid.Column>
                     <Grid.Column width={4} className="lobby-selection-details">
-                        <div className="team-box">
-                            <div className="versus">VS</div>
+                        <div className="loby-team-box">
+                            <div className="loby-versus">VS</div>
                         </div>
                     </Grid.Column>
-                    <Grid.Column width={6} className="team-blue">
-                        <div className="team-box">
-                            <div className="header"><div>BLUE TEAM</div></div>
-                            <div className="player">
+                    <Grid.Column width={6}>
+                        <div className="loby-team-box">
+                            <div className="loby-header loby-team-blue"><div>BLUE TEAM</div></div>
+                            <div className="loby-player">
                                 {this.render_player(2, 0)}
                             </div>
-                            <div className="player">
-                                {this.render_player(2, 1)}
-                            </div>
+                            {(blue_team.players.length > 1 || (blue_team.players.length > 0 && my_team != 1)) &&
+                                <div className="loby-player">
+                                    {this.render_player(2, 1)}
+                                </div>
+                            }
                         </div>
                     </Grid.Column>
                 </Grid.Row>

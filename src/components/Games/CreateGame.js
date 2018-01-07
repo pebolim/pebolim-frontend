@@ -43,7 +43,7 @@ export default class CreateGame extends React.Component {
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
 
-        this.setState({[name]: value}, function(){console.log(this.state)}.bind(this));
+        this.setState({[name]: value});
     }
 
     handleChange(date) {
@@ -61,7 +61,7 @@ export default class CreateGame extends React.Component {
                 "Authorization": localStorage.getItem("token"),
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ game: this.state })
+            body: JSON.stringify(this.state)
         }).then(response => {
             return response.json();
         }).then(body => {
