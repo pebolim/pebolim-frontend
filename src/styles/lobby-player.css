@@ -1,4 +1,4 @@
-.player-box{
+.player-box, .team-box{
     position: relative;
     height: 100%;
     width: 100%;
@@ -6,39 +6,28 @@
     display: block;
 }
 
-.player_hover{
+.player_hover, .team_hover{
     /* box-shadow: 0 0 10px rgba(0,0,0,.3); */
     position: relative;
     height: 180px;
     width: 180px;
     margin: 0 auto;
     border: solid 1px #1C1C1C;
-    border-radius: 3px;
+    border-radius: 50%;
     transition: border .1s ease-out;
     background-size: cover !important;
     background-position: 50%;
 }
 
-    .player_hover:hover {
+    .player_hover:hover, .team_hover:hover{
         border-color: #22B782;
         background-color: rgb(49, 49, 49);
         opacity: 0.8;
     }
 
-.player-number{
-    position: absolute;
-    top: 50%;
-    left:50%;
-    transform: translateY(-50%) translateX(-50%) !important;
-
-    font-size: 3.1em;
-    color:#000;
-}
-
-
 .join-icon{
-    width: 75px;
-    height: 75px;  
+    width: 40%;
+    height: 40%;  
     
     position: absolute;
     top: 50%;
@@ -46,26 +35,55 @@
     transform: translateY(-50%) translateX(-50%) !important;
 
     cursor: pointer;
-    transition: none 33ms cubic-bezier(.3,0,.7,1);
+    transition: width 0.3s, height 0.3s;
     transition-property: all;
 }
 
     .join-icon:hover{
-        width: 82px;
-        height: 82px;
+        width: 55%;
+        height: 55%;
     }
 
-.player-name{
-    height: 40px;
+.cancel-icon{
+    width: 15%;
+    height: 15%;  
+    
+    position: absolute;
+    top: 0;
+    right:0;
+    
+
+    cursor: pointer;
+    transition: width 0.3s, height 0.3s;
+    transition-property: all;
 }
 
-.player-name > div{
+    .cancel-icon:hover{
+        width: 17%;
+        height: 17%;
+    }
+
+.player-name,.team-name{
+    height: 40px;
     color:#eee;
     text-overflow: ellipsis;
     text-align: center;
     font-size: 1.2em;
+}
 
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
+.team-player-img{
+    height: 80px;
+    width: 80px;
+    border: solid 1px #1C1C1C;
+    border-radius: 50%;
+    background-size: cover !important;
+    background-position: 50%;
+}
+
+.team-player-name{
+    height: 30px;
+    color:#eee;
+    text-overflow: ellipsis;
+    text-align: left;
+    font-size: 1.1em;
 }

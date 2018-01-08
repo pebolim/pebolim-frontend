@@ -1,8 +1,11 @@
 import React from 'react';
-import { Redirect } from 'react-router';
+import { Redirect, Switch } from 'react-router';
 import { Form, Grid, Input,Image,Header,Button,Icon } from 'semantic-ui-react'
 
 import '../../styles/login.css'
+import Router from 'react-router/Router';
+import { BrowserRouter } from 'react-router-dom';
+import Route from 'react-router/Route';
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -60,7 +63,7 @@ export default class Login extends React.Component {
     const { redirect } = this.state;
     
     if (redirect) {
-        return <Redirect to="/home" />;
+        window.location.href="/home"
     }
      
     return (
