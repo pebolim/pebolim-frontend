@@ -10,9 +10,9 @@ export default class TeamLobby extends React.Component {
         super(props);
 
         this.state = this.props.state;
-        this.state.modalOpen=false; 
-        this.state.teams= [];
-        this.state.chosen_team=null;
+        this.state.modalOpen = false;
+        this.state.teams = [];
+        this.state.chosen_team = null;
         console.log(this.state)
 
         this.joinGame = this.joinGame.bind(this);
@@ -20,9 +20,9 @@ export default class TeamLobby extends React.Component {
 
     render_team(team_ref) {
         if (team_ref === 1)
-            return (<Team player={this.state.red_team} onClick={() => this.update(0)} />);
+            return (<Team team={this.state.red_team} my_team={this.state.my_team==0} onClick={() => this.update(0)} />);
         else
-            return (<Team player={this.state.blue_team} onClick={() => this.update(1)} />);
+            return (<Team team={this.state.blue_team} my_team={this.state.my_team==1} onClick={() => this.update(1)} />);
     }
 
     update(team) {
@@ -96,20 +96,36 @@ export default class TeamLobby extends React.Component {
     }
 
     setTeam() {
-        //console.log(index)
+        let team_to_set = {
+            name: this.state.chosen_team.name,
+            id: this.state.chosen_team.id,
+            image_url: this.state.chosen_team.image_url,
+            players: [
+                {
+                    nickname: this.state.chosen_team.partner.nickname,
+                    id: this.state.chosen_team.partner.id,
+                    image_url: this.state.chosen_team.partner.image_url
+                },
+                {
+                    nickname: JSON.parse(localStorage.getItem("user")).nickname,
+                    id: JSON.parse(localStorage.getItem("user")).id,
+                    image_url: JSON.parse(localStorage.getItem("user")).image_url
+                },
+            ]
+        };
         if (this.state.red_team === undefined) {
-            this.setState({ red_team: this.state.chosen_team, my_team: 0 });
+            this.setState({ red_team: team_to_set, my_team: 0 });
         } else {
-            this.setState({ blue_team: this.state.chosen_team, my_team: 1 });
+            this.setState({ blue_team: team_to_set, my_team: 1 });
         }
         this.forceUpdate();
     }
 
     removeTeam(team) {
         if (team === 0) {
-            this.setState({ red_team: [], my_team: -1 });
+            this.setState({ red_team: undefined, my_team: -1 });
         } else {
-            this.setState({ blue_team: [], my_team: -1 });
+            this.setState({ blue_team: undefined, my_team: -1 });
         }
         this.forceUpdate();
     }
@@ -137,7 +153,7 @@ export default class TeamLobby extends React.Component {
                     </Modal.Content>
                     <Modal.Actions>
                         {chosen_team && <Button color='green' onClick={this.joinGame}>Select</Button>}
-                        {chosen_team===null && <Button disabled color='green'>Select</Button>}
+                        {chosen_team === null && <Button disabled color='green'>Select</Button>}
                     </Modal.Actions>
                 </Modal>
             );
@@ -163,7 +179,9 @@ export default class TeamLobby extends React.Component {
                         <div className="loby-team-box">
                             <div className="loby-header loby-team-blue"><div>BLUE TEAM</div></div>
                             <div className="loby-players">
-                                {((red_team!==undefined && blue_team!==undefined)||(red_team!==undefined && my_team===-1)) && this.render_team(2)}
+                                {((red_team !== undefined && blue_team !== undefined) || (red_team !== undefined && my_team === -1)) &&
+                                    this.render_team(2)
+                                }
                             </div>
                         </div>
                     </Grid.Column>

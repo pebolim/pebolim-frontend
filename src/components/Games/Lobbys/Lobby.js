@@ -75,12 +75,12 @@ export default class Lobby extends React.Component {
     }
 
     render_start_button() {
-        if (
-            this.state.user.id == this.state.game_details.owner_id &&
-            this.state.red_team!==undefined &&
-            this.state.blue_team!==undefined
-        ) {
-            if (this.state.blue_team.players.length === 2 && this.state.red_team.players.length === 2) {
+        if (this.state.user.id == this.state.game_details.owner_id) {
+            if (this.state.red_team!==undefined &&
+                this.state.blue_team!==undefined && 
+                this.state.blue_team.players.length === 2 && 
+                this.state.red_team.players.length === 2
+            ) {
                 return (<button className="lobby-begin-button" onClick={this.redirectToGameView}>Start Game</button>);
             }
             else {

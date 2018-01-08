@@ -1,4 +1,4 @@
-.player-box{
+.player-box, .team-box{
     position: relative;
     height: 100%;
     width: 100%;
@@ -6,7 +6,7 @@
     display: block;
 }
 
-.player_hover{
+.player_hover, .team_hover{
     /* box-shadow: 0 0 10px rgba(0,0,0,.3); */
     position: relative;
     height: 180px;
@@ -19,7 +19,7 @@
     background-position: 50%;
 }
 
-    .player_hover:hover {
+    .player_hover:hover, .team_hover:hover{
         border-color: #22B782;
         background-color: rgb(49, 49, 49);
         opacity: 0.8;
@@ -63,10 +63,27 @@
         height: 17%;
     }
 
-.player-name{
+.player-name,.team-name{
     height: 40px;
     color:#eee;
     text-overflow: ellipsis;
     text-align: center;
     font-size: 1.2em;
+}
+
+.team-player-img{
+    height: 80px;
+    width: 80px;
+    border: solid 1px #1C1C1C;
+    border-radius: 50%;
+    background-size: cover !important;
+    background-position: 50%;
+}
+
+.team-player-name{
+    height: 30px;
+    color:#eee;
+    text-overflow: ellipsis;
+    text-align: left;
+    font-size: 1.1em;
 }
