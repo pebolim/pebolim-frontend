@@ -204,12 +204,14 @@ export default class LiveGame extends React.Component {
 
 const GoalsBoard = props => {
     
+    /*
     for(let i=0;i<2; i++){
         <button className="game-player player-red" onClick={this.handleGoalClick}>legend27</button>
         <div className="space"></div>
         <button className="game-player player-red" onClick={this.handleGoalClick}>olajohneewee15</button>
     }
-    
+    */
+
     return(
         <div className="game-goals-selection">
             <div className="game-team-separator">RED TEAM</div>
