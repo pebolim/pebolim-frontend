@@ -11,6 +11,7 @@ import PlayerLobby from './Games/Lobbys/PlayerLobby';
 import UserDetails from './User/UserDetails';
 import CreateTeam from './Teams/CreateTeam';
 import ListTeam from './Teams/ListTeams';
+import PublicGame from './Games/PublicGames';
 
 
 export default class Main extends React.Component {
@@ -28,6 +29,7 @@ export default class Main extends React.Component {
                 <Route path="/user/details" component={UserDetails} />
                 <Route path="/team/create" component={CreateTeam} /> 
                 <Route path="/teams" component={ListTeam} />
+                <Route path="/publicgames" component={PublicGame} /> 
             </Switch>           
         );
     }
