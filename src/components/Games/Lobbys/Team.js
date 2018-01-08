@@ -3,7 +3,7 @@ import React from 'react';
 
 import '../../../styles/lobby-player.css';
 
-export default class Player extends React.Component {
+export default class Team extends React.Component {
     constructor(props) {
         super(props)
 

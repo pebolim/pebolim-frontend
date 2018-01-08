@@ -13,7 +13,7 @@
     width: 180px;
     margin: 0 auto;
     border: solid 1px #1C1C1C;
-    border-radius: 3px;
+    border-radius: 50%;
     transition: border .1s ease-out;
     background-size: cover !important;
     background-position: 50%;
@@ -25,20 +25,9 @@
         opacity: 0.8;
     }
 
-.player-number{
-    position: absolute;
-    top: 50%;
-    left:50%;
-    transform: translateY(-50%) translateX(-50%) !important;
-
-    font-size: 3.1em;
-    color:#000;
-}
-
-
 .join-icon{
-    width: 75px;
-    height: 75px;  
+    width: 40%;
+    height: 40%;  
     
     position: absolute;
     top: 50%;
@@ -46,26 +35,38 @@
     transform: translateY(-50%) translateX(-50%) !important;
 
     cursor: pointer;
-    transition: none 33ms cubic-bezier(.3,0,.7,1);
+    transition: width 0.3s, height 0.3s;
     transition-property: all;
 }
 
     .join-icon:hover{
-        width: 82px;
-        height: 82px;
+        width: 55%;
+        height: 55%;
+    }
+
+.cancel-icon{
+    width: 15%;
+    height: 15%;  
+    
+    position: absolute;
+    top: 0;
+    right:0;
+    
+
+    cursor: pointer;
+    transition: width 0.3s, height 0.3s;
+    transition-property: all;
+}
+
+    .cancel-icon:hover{
+        width: 17%;
+        height: 17%;
     }
 
 .player-name{
     height: 40px;
-}
-
-.player-name > div{
     color:#eee;
     text-overflow: ellipsis;
     text-align: center;
     font-size: 1.2em;
-
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
 }
