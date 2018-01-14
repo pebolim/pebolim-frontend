@@ -92,6 +92,7 @@ export default class Header extends React.Component {
     }
 
     componentDidMount() {
+        
         if (localStorage.getItem('token') != null) {
             this.getInvites();
             setInterval(this.getInvites, 5000)
@@ -117,7 +118,7 @@ export default class Header extends React.Component {
                                     <Image src={require('../assets/images/logoPEBOLIM.png')} size='mini' />
                                 </Menu.Item>
                                 <Menu.Item><Link to='/home'>Home</Link></Menu.Item>
-                                <Menu.Item><Link to='/game/create'>Create Game</Link></Menu.Item>
+                                <Menu.Item><Link to='/publicgames'>Games</Link></Menu.Item>
                                 <Menu.Item><Link to='/teams'>Teams</Link></Menu.Item>
                             </Menu.Menu>
                             {log}
