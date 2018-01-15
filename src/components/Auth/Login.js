@@ -56,7 +56,11 @@ export default class Login extends React.Component {
           localStorage.setItem('user',JSON.stringify(data.user));
           self.props.history.push("/home")
           NotificationManager.success('Login efetuado com sucesso',"",2000);
-        }         
+        } 
+        else{ 
+          NotificationManager.error('Autenticação falhou! Verifique as credenciais!',"",2000); 
+        }  
+               
         //window.location.assign("/player/games");
       }).catch(err => {
         console.log(err);
