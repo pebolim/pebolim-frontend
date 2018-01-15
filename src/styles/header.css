@@ -7,7 +7,7 @@
     color:#3c38f8;
 }
 
-.ui.link.menu .item:hover, .ui.menu .dropdown.item:hover, .ui.menu .link.item:hover, .ui.menu a.item:hover{
+.ui.link.menu .item:hover, .ui.menu .dropdown.item:hover, .ui.menu .link.item:hover{
     color:#00ff94;
 }
 
@@ -17,6 +17,11 @@
     font-size: 1.5em;
     cursor:pointer;   
 }
+
+.ui.menu a.item:hover{
+    color:#3c38f8;
+}
+
 
 @keyframes haveInvites{
     0%{

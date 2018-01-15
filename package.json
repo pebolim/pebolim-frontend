@@ -12,10 +12,11 @@
     "react-dom": "^16.1.0",
     "react-fontawesome": "^1.6.1",
     "react-hover-observer": "^2.0.2",
+    "react-notifications": "^1.4.3",
     "react-router-dom": "^4.2.2",
     "react-scripts": "^1.0.17",
-    "semantic-ui-react": "^0.77.0",
-    "react-time-format": "0.0.5"
+    "react-time-format": "0.0.5",
+    "semantic-ui-react": "^0.77.0"
   },
   "scripts": {
     "start": "set PORT=3001 && react-scripts start",

@@ -15,14 +15,25 @@ export default class Stopwatch extends React.Component {
             laps: [],
             lastClearedIncrementer: null
         };
-        this.incrementer = null;     
+        this.incrementer = null;  
+        
+        
     }  
+
+    componentWillUnmount(){
+        this.handleStopClick()
+    }
     
     componentWillReceiveProps(nextProps){
-        if(nextProps.start_time != null){         
+        if(nextProps.start_time != null && this.incrementer == null){         
             var start_time = parseInt(((new Date()- new Date(nextProps.start_time)) /1000).toFixed(0));
             this.setState({secondsElapsed: start_time});
             this.handleStartClick();
+        }
+        if(nextProps.finished_time != null && this.incrementer != null){
+            var finished_time = parseInt(((new Date(nextProps.finished_time)-new Date(nextProps.start_time)) /1000).toFixed(0));
+            this.setState({secondsElapsed: finished_time});
+            this.handleStopClick();
         }       
     }
 
@@ -36,9 +47,11 @@ export default class Stopwatch extends React.Component {
 
     handleStopClick() {
         clearInterval(this.incrementer);
+        this.incrementer = 0;
         this.setState({
             lastClearedIncrementer: this.incrementer
         });
+        console.log("timer stopped!")
     }
 
     handleResetClick() {
@@ -51,7 +64,7 @@ export default class Stopwatch extends React.Component {
 
     render() {
         return (        
-            <div>{formattedSeconds(this.state.secondsElapsed)}</div>
+            <div id="timer">{formattedSeconds(this.state.secondsElapsed)}</div>
             // {(this.state.secondsElapsed === 0 ||
             //     this.incrementer === this.state.lastClearedIncrementer
             //     ? <Button className="start-btn" onClick={this.handleStartClick.bind(this)}>start</Button>

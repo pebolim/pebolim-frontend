@@ -1,7 +1,7 @@
 import React from 'react';
 import Time from 'react-time-format'
 import { Link } from "react-router-dom";
-import { Container, Header, Grid, Dimmer, Loader, Button } from 'semantic-ui-react';
+import { Container, Header, Item, Grid, Dimmer, Loader, Button } from 'semantic-ui-react';
 
 export default class ListTeam extends React.Component {
     constructor(props) {
@@ -27,7 +27,6 @@ export default class ListTeam extends React.Component {
             .then(result => result.json())
             .then(response => {
                 this.setState({ teams: response.data })
-                console.log(this.state.teams)
             })
         this.setState({ loading: false })
     }
@@ -43,22 +42,26 @@ export default class ListTeam extends React.Component {
         } else {
             return (
                 <div>
-                    <Grid>
-                        <Grid.Row>
-                            <Grid.Column width={5} textAlign="center">
-                                <Link to='/team/create' style={{ cursor: "pointer" }}><Button>Create Team</Button></Link>
-                            </Grid.Column>
-                        </Grid.Row>
-
-                        {this.state.teams.map((item, i) =>(
-
-                            <Grid.Row>
-                                <Grid.Column width={5} textAlign="center">
-                                    <h2>{item.partner.nickname}</h2>
-                                    <h4>{item.name}</h4>
-                                </Grid.Column>
-                            </Grid.Row>
+                    <Item.Group>
+                        {this.state.teams.map((item, i) => (
+                            <Item key={"team" + i}>
+                            <Item.Image size="tiny" src={item.image_url == null ? require("../../assets/images/noteam.png") : require(item.image_url)}/>
+                            <Item.Content verticalAlign="middle">
+                                <Item.Header style={{color:"#1c8bff"}}>{item.name}</Item.Header>
+                                <Item.Meta style={{color:"white"}}>
+                                    <span>{item.partner.nickname}</span>
+                                    </Item.Meta>
+                                <h2></h2>
+                                </Item.Content>
+                            </Item>
                         ))}
+                    </Item.Group>
+                    <Grid>
+                    <Grid.Row>
+                        <Grid.Column width={16} textAlign="center">
+                            <Link to='/team/create' style={{ cursor: "pointer"}}><Button color="blue" style={{fontFamily:" Lato,'Helvetica Neue',Arial,Helvetica,sans-serif"}}>Create Team</Button></Link>
+                        </Grid.Column>
+                    </Grid.Row>
                     </Grid>
                 </div>
             );
