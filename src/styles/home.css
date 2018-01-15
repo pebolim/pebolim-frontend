@@ -1,0 +1,15 @@
+.ui[class*="internally celled"].grid{
+    min-height:500px;
+}
+
+.ui.action.input>.button, .ui.action.input>.buttons>.button{
+    font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+}
+
+.ui.icon.input>i.icon{
+    color:white;
+}
+
+.ui.primary.button{
+    font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+}

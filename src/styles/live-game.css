@@ -76,14 +76,34 @@
                         top: 50%;
                         background-color: #1A1A1A;
                         border-radius: 5px !important;
-                        padding: 6px 15px;
+                        padding: 8px 17px;
                         margin-right:5%;
                     }
                         .game-board-state{
                             font-family: 'Nunito Sans', sans-serif;
                             font-size: 1.1em;
-                            color: rgb(20, 235, 85);
+                            color: #fafafa;
                             font-weight: 700;
+                            
+                        }
+                        .game-live > span, .game-finished> span{
+                            display: inline-block;
+                        }
+                        .game-live > div{
+                            background-color: #13f21e;
+                            margin-right: 8px;
+                            float: left;
+                            width: 17px;
+                            height: 17px;
+                            border-radius: 50%; 
+                        }
+                        .game-finished > div{
+                            background-color: #e52200;
+                            margin-right: 8px;
+                            float: left;
+                            width: 17px;
+                            height: 17px;
+                            border-radius: 50%;
                         }
                                   
                 .game-board-info-box{
@@ -218,6 +238,7 @@
 
         .game-details-container{
             height: 80%;
+            overflow-y: auto;
         }
             .game-details-container > div{
                 display:block;
@@ -306,6 +327,9 @@
             padding-left: 5%;
             padding-right: 5%;
             width: 100%;
+        }
+        .game-player:first-child{
+            margin-right: 4%;
         }
             .game-player{
                 color: #D6D6D6;

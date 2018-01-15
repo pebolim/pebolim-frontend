@@ -10,8 +10,6 @@ export default class PlayerLobby extends React.Component {
         super(props);
 
         this.state = this.props.state
-
-        this.sendPosition = this.sendPosition.bind(this);
     }
 
     render_player(team_ref, player_ref) {

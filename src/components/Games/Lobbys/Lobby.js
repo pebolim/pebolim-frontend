@@ -42,11 +42,12 @@ export default class Lobby extends React.Component {
         })
             .then(res => res.json())
             .then(result => {
+                console.log(result)
                 if (result.status === 200) {
                     this.setState({
                         game_details: result.game,
-                        red_team: result.teams[0],
-                        blue_team: result.teams[1]
+                        red_team: result.game.teams[0],
+                        blue_team: result.game.teams[1]
                     });
                     this.set_team();
                 } else {
