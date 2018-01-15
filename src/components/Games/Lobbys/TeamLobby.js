@@ -179,7 +179,7 @@ export default class TeamLobby extends React.Component {
                         <div className="loby-team-box">
                             <div className="loby-header loby-team-blue"><div>BLUE TEAM</div></div>
                             <div className="loby-players">
-                                {((red_team !== undefined && blue_team !== undefined) || (red_team !== undefined && my_team === -1)) &&
+                                {((red_team !== undefined && blue_team !== undefined) || (red_team !== undefined && my_team === -1) || (blue_team!==undefined)) &&
                                     this.render_team(2)
                                 }
                             </div>

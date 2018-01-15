@@ -33,7 +33,7 @@ export default class Lobby extends React.Component {
     }
 
     getGameDetails() {
-        fetch(`http://localhost:3000/game/` + this.state.lobby_id, {
+        fetch(`http://localhost:3000/game/` + this.state.lobby_id +`/details`, {
             method: 'GET',
             headers: new Headers({
                 "Authorization": localStorage.getItem("token"),

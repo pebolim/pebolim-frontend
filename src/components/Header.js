@@ -103,6 +103,7 @@ export default class Header extends React.Component {
     }
 
     componentDidMount() {
+        
         if (localStorage.getItem('token') != null) {
             this.getInvites();
             this.interval = setInterval(this.getInvites, 10000)
