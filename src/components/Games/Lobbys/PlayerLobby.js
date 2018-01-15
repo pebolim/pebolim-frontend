@@ -25,8 +25,8 @@ export default class PlayerLobby extends React.Component {
 
       
     componentDidMount(){
-        this.state.user = JSON.parse(localStorage.getItem("user"));
-        //console.log(this.state)
+        this.setState({ user: JSON.parse(localStorage.getItem("user"))});  
+
         var headers = new Headers({
             "Authorization":localStorage.getItem("token"),
             'Content-Type': 'application/json'
