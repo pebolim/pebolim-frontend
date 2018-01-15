@@ -115,9 +115,9 @@ export default class Lobby extends React.Component {
         if (redirect) {
             return <Redirect to={"/game/" + this.state.lobby_id + "/live"} />;
         }
-        if (load == 0) {
+        if (load === 0) {
             return (<div>LOADING</div>);
-        } if (load != 200) {
+        } if (load !== 200) {
             return (<div><h2>ERROR</h2><h4>{message}</h4></div>);
         }
 

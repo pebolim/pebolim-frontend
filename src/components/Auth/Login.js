@@ -74,7 +74,7 @@ export default class Login extends React.Component {
               <Form.Group>
                 <Grid>
                   <Grid.Row>
-                    <Input type="email" name="email" label="Email" onChange={this.handleChange} required/>
+                  <Input type="email" name="email" label="Email" onChange={this.handleChange} required/>
                   </Grid.Row>
                   <Grid.Row>
                     <Input type="password" name="password" label="Password" onChange={this.handleChange} required/>
