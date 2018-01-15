@@ -199,7 +199,7 @@ export default class LiveGame extends React.Component {
     }
 
     getGameDetails(headers){
-        fetch(`http://localhost:3000/game/`+this.state.lobby_id,{
+        fetch(`http://localhost:3000/game/`+this.state.lobby_id+'/details',{
             method: 'GET',
             headers: headers
         })

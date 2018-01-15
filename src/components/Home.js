@@ -29,7 +29,7 @@ export default class Home extends React.Component {
             <Grid celled='internally'>
                 <Grid.Row>
                     <Grid.Column width={4}>
-                        {/*<PublicGames />*/}
+                        <PublicGames />
                     </Grid.Column>
                     <Grid.Column width={8} textAlign="center">
                         <Segment padded style={{marginTop:20+"%"}}>

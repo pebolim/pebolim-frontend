@@ -137,9 +137,7 @@ export default class Header extends React.Component {
                                 <Menu.Item>
                                     <Image src={require('../assets/images/logoPEBOLIM.png')} size='mini' as="a" href="/"/>
                                 </Menu.Item>
-                                <Menu.Item as="a" href="/home">Home</Menu.Item>
-                                <Menu.Item as="a" href="/game/create">Create Game</Menu.Item>
-                                <Menu.Item as="a" href="/teams">Teams</Menu.Item>
+                                <Menu.Item as="a" style={{display:localStorage.getItem('token') == null ? 'none' : 'block'}} href="/home">Home</Menu.Item>
                             </Menu.Menu>
                             {log}
                         </Menu>

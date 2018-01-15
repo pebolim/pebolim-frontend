@@ -7,8 +7,8 @@
     text-align: center
 }
 
-.ui.header:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6){
-    color:white;
+.ui.center.aligned.header, .ui.centered.header{
+    color:"blue";
 }
 
 .ui.big.button{

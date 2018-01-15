@@ -69,7 +69,7 @@ export default class Login extends React.Component {
         <Grid centered columns={3}>
           <Grid.Column>
           <Image centered src={require('../../assets/images/logoPEBOLIM.png')} size='tiny' />
-          <Header>Sign in</Header>
+          <Header textAlign="center">Sign in</Header>
             <Form id="form">
               <Form.Group>
                 <Grid>
