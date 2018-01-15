@@ -1,24 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Redirect, Switch } from 'react-router';
 import { Form, Grid, Input,Image,Header,Button,Icon } from 'semantic-ui-react'
+import 'react-notifications/lib/notifications.css';
 
 import '../../styles/login.css'
 import Router from 'react-router/Router';
 import { BrowserRouter } from 'react-router-dom';
 import Route from 'react-router/Route';
+import Layout from '../Layout';
+import {NotificationManager, NotificationContainer} from 'react-notifications'
 
 export default class Login extends React.Component {
-  constructor(props) {
+  constructor(props, object) {
     super(props);
-
     this.state = {
       email: '',
       password: '',
-      redirect: false
+      redirect: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+
   }
 
   handleChange(event) {
@@ -51,7 +54,8 @@ export default class Login extends React.Component {
         if(data.status === 200){
           localStorage.setItem('token', data.token);
           localStorage.setItem('user',JSON.stringify(data.user));
-          self.setState({ redirect: true })   
+          self.props.history.push("/home")
+          NotificationManager.success('Login efetuado com sucesso',"",2000);
         }         
         //window.location.assign("/player/games");
       }).catch(err => {
@@ -60,13 +64,8 @@ export default class Login extends React.Component {
   }
 
   render() {
-    const { redirect } = this.state;
-    
-    if (redirect) {
-        window.location.href="/home"
-    }
-     
     return (
+      
         <Grid centered columns={3}>
           <Grid.Column>
           <Image centered src={require('../../assets/images/logoPEBOLIM.png')} size='tiny' />

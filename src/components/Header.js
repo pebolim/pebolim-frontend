@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Link } from "react-router-dom";
-import { Image, Responsive, Button, Icon, Sidebar, Menu, Label, Container, Dropdown, Confirm } from 'semantic-ui-react';
+import { Image, Responsive, Icon, Sidebar, Menu, Container, Dropdown} from 'semantic-ui-react';
 
 
 import '../styles/header.css';
@@ -32,7 +32,7 @@ function DropDownTeamInvitations(props) {
                             <Dropdown.Item key={"invite"+i.id}>
                                 <b>{i.partner.nickname}</b> invited you for a team
                                 <br />
-                    <button style={{width:100+"%",backgroundColor:"#00ff94",border:"1px solid #00ff94", cursor:"pointer",color:"white"}} onClick={() => acceptInvite(i.id)}>Aceitar</button>
+                    <button style={{width:100+"%",backgroundColor:"#00ff94",border:"1px solid #00ff94", cursor:"pointer",color:"white"}} onClick={() => acceptInvite(i.id)}>Accept</button>
                         </Dropdown.Item>
                         )
                     })
@@ -86,9 +86,14 @@ export default class Header extends React.Component {
             method: 'GET',
             headers: headers
         }
-        fetch(`http://localhost:3000/teams/pendent/`, myInit)
-            .then(result => result.json())
-            .then(invs => this.setState({ invites: invs.data }))
+        let response = fetch(`http://localhost:3000/teams/pendent/`, myInit)
+            .then(result => result.json());
+        if(response.status==401){
+            localStorage.clear();
+            window.location.href = "/login"
+        }else{
+            response.then(invs => this.setState({ invites: invs.data }))
+        }
     }
 
     componentDidMount() {
@@ -96,6 +101,15 @@ export default class Header extends React.Component {
         if (localStorage.getItem('token') != null) {
             this.getInvites();
             setInterval(this.getInvites, 5000)
+        }
+    }
+
+    componentWillUpdate(nextProps,nextState){
+        if(nextState==this.state){
+            if (localStorage.getItem('token') != null) {
+                this.getInvites();
+                setInterval(this.getInvites, 5000)
+            }
         }
     }
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import Time from 'react-time-format'
 import { Container, Header, Grid, Statistic, Menu, Dimmer, Loader } from 'semantic-ui-react';
-import { GamesByUser } from '../../styles/Games/GamesByUser.css';
 
 
 export default class Game extends React.Component {
