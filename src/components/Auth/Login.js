@@ -16,7 +16,7 @@ export default class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
-      redirect: false,
+      redirect: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -56,6 +56,9 @@ export default class Login extends React.Component {
           localStorage.setItem('user',JSON.stringify(data.user));
           self.props.history.push("/home")
           NotificationManager.success('Login efetuado com sucesso',"",2000);
+        }
+        else{
+          NotificationManager.error('Autenticação falhou! Verifique as credenciais!',"",2000);
         }         
         //window.location.assign("/player/games");
       }).catch(err => {
@@ -74,7 +77,7 @@ export default class Login extends React.Component {
               <Form.Group>
                 <Grid>
                   <Grid.Row>
-                    <Input type="email" name="email" label="Email" onChange={this.handleChange} required/>
+                  <Input type="email" name="email" label="Email" onChange={this.handleChange} required/>
                   </Grid.Row>
                   <Grid.Row>
                     <Input type="password" name="password" label="Password" onChange={this.handleChange} required/>
