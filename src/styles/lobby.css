@@ -77,6 +77,7 @@
 .lobby-info-lock{
     height: 3%;
     position: relative;
+    top:0;
 }
 
 .lobby-info-lock > i{
@@ -88,6 +89,13 @@
 .lobby-info-title{
     height: 17%;
     position: relative;
+}
+
+.lobby-info-title > h2{
+    position: absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-50%,-50%) !important;
     color:rgb(0, 146, 93);
     font-family: 'Teko', sans-serif;
     font-weight: 300;
@@ -96,15 +104,7 @@
     text-transform: uppercase;
 }
 
-.lobby-info-title > h2{
-    position: absolute;
-    left:50%;
-    top:50%;
-    transform: translate(-50%,-50%) !important;
-}
-
 .lobby-info {
-    height: 60%;
     padding: 0 20px;
     position: relative;
 }
@@ -144,7 +144,9 @@
 
 .lobby-info-text{
     font-weight: 150;
-    font-size: 2em;
+    font-size: 2.2em;
     color:rgb(0, 141, 89);
+    font-family: 'Teko', sans-serif;
+    margin-bottom: 1%;
 }
 /*__________________ LOBBY INFO LAYOUT ___________________*/

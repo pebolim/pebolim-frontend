@@ -1,7 +1,7 @@
 import React from 'react';
 import PlayerLobby from './PlayerLobby';
 import TeamLobby from './TeamLobby';
-import { Grid, Icon } from 'semantic-ui-react';
+import { Grid, Icon, Loader, Dimmer } from 'semantic-ui-react';
 import Time from 'react-time-format';
 import { Redirect } from 'react-router';
 
@@ -33,7 +33,7 @@ export default class Lobby extends React.Component {
     }
 
     getGameDetails() {
-        fetch(`http://localhost:3000/game/` + this.state.lobby_id +`/details`, {
+        fetch(`http://localhost:3000/game/` + this.state.lobby_id + `/details`, {
             method: 'GET',
             headers: new Headers({
                 "Authorization": localStorage.getItem("token"),
@@ -60,14 +60,14 @@ export default class Lobby extends React.Component {
 
     set_team() {
         let flag = true;
-        if (this.state.red_team!==undefined)
+        if (this.state.red_team !== undefined)
             this.state.red_team.players.forEach(player => {
                 if (player.id === this.state.user.id) {
                     this.setState({ my_team: 0 });
                     flag = false;
                 }
             });
-        if (this.state.blue_team!== undefined)
+        if (this.state.blue_team !== undefined)
             if (flag) {
                 this.state.blue_team.players.forEach(player => {
                     if (player.id === this.state.user.id)
@@ -78,9 +78,9 @@ export default class Lobby extends React.Component {
 
     render_start_button() {
         if (this.state.user.id == this.state.game_details.owner_id) {
-            if (this.state.red_team!==undefined &&
-                this.state.blue_team!==undefined && 
-                this.state.blue_team.players.length === 2 && 
+            if (this.state.red_team !== undefined &&
+                this.state.blue_team !== undefined &&
+                this.state.blue_team.players.length === 2 &&
                 this.state.red_team.players.length === 2
             ) {
                 return (<button className="lobby-begin-button" onClick={this.redirectToGameView}>Start Game</button>);
@@ -117,7 +117,9 @@ export default class Lobby extends React.Component {
             return <Redirect to={"/game/" + this.state.lobby_id + "/live"} />;
         }
         if (load === 0) {
-            return (<div>LOADING</div>);
+            return (<Dimmer active>
+                <Loader size='massive'>Loading</Loader>
+            </Dimmer>);
         } if (load !== 200) {
             return (<div><h2>ERROR</h2><h4>{message}</h4></div>);
         }
@@ -141,12 +143,12 @@ export default class Lobby extends React.Component {
 
                     </Grid.Column>
                     <Grid.Column width={4}>
-                        <div className="lobby-info-lock">
-                            {game_details.is_private && <Icon name='lock' />}
-                            {!game_details.is_private && <Icon name='unlock' />}
-                        </div>
                         <div className="lobby-info-title">
                             <h2>Game Details</h2>
+                            <div className="lobby-info-lock">
+                                {game_details.is_private && <Icon name='lock' />}
+                                {!game_details.is_private && <Icon name='unlock' />}
+                            </div>
                         </div>
                         <div className="lobby-info">
                             <label>Created by</label>
@@ -161,6 +163,9 @@ export default class Lobby extends React.Component {
                             <label>Match hour</label>
                             <br />
                             <p className="lobby-info-text"><Time value={this.state.game_details.match_day} format="hh:mm" /></p>
+                            <label>URL</label>
+                            <br />
+                            <p className="lobby-info-text">{this.state.game_details.url}</p>
                         </div>
                         <div className="lobby-begin-button-wrapper">
                             {this.render_start_button()}

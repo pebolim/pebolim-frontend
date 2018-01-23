@@ -50,7 +50,7 @@ export default class PublicGame extends React.Component {
 
         if(loading){
             return (
-                <Dimmer active>
+                <Dimmer active style={{marginTop:20+"%"}}>
                     <Loader size='massive'>Loading</Loader>
                 </Dimmer>
             );
@@ -58,12 +58,12 @@ export default class PublicGame extends React.Component {
         if(redirect){return <Redirect to={"/game/" + selected_game + "/lobby"} />;}
 
         return (
-            <div>
+            <div className="games_board">
                 <Header id="title" as="h1" textAlign="center" style={{paddingBottom: 10}}>Jogos Públicos</Header>
                 {
                     this.state.games.map((game, i) =>
                         (
-                            <div fluid key={i} onClick={()=>this.handleClick(i)} className="game_details">
+                            <Container fluid key={i} onClick={()=>this.handleClick(i)} className="game_details">
                                 <Grid columns='equal'>
                                     <Grid.Row>
                                         <Grid.Column textAlign="left" style={{paddingLeft:40}} >
@@ -76,7 +76,7 @@ export default class PublicGame extends React.Component {
                                         </Grid.Column>
                                     </Grid.Row>
                                 </Grid>
-                            </div>
+                            </Container>
                         ))
                 }
             </div>

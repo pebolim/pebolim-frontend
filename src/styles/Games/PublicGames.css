@@ -1,12 +1,19 @@
-.game_details{
-    background-color: #222222;
-    border: solid 1px #1C1C1C; 
-    border-radius: 15%;
-    transition: border .1s ease-out;
-    margin: 2% 1%;
+.games_board{
+    margin-right: 50px;
 }
 
-.game_details:hover{
+.ui.fluid.container.game_details{
+    cursor: pointer;
+    border: solid 1px #1C1C1C; 
+    transition: border .1s ease-out;
+    
+}
+
+.ui.fluid.container.game_details:hover{
     border: solid 1px #22B782;
     background-color: #181818; 
+}
+
+.ui.equal.width.grid{
+ margin: 0.5% 0.3%;
 }
