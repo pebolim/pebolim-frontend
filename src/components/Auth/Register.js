@@ -1,6 +1,8 @@
 import React from 'react';
 import { Input, Form, Dimmer, Loader, Grid, Image, Header, Button } from 'semantic-ui-react'
 import '../../styles/register.css'
+import {NotificationManager, NotificationContainer} from 'react-notifications'
+
 
 export default class Register extends React.Component {
     constructor(props) {
@@ -28,6 +30,8 @@ export default class Register extends React.Component {
     handleSubmit(event) {
         console.log(this.state);
         event.preventDefault();
+        if(this.state.email!="" && this.state.password!="" && this.state.nickname!="" && this.state.age!=0){   
+
         fetch('http://127.0.0.1:3000/signin', {
             method: 'POST',
             headers: {
@@ -38,12 +42,15 @@ export default class Register extends React.Component {
             ).then(function (data) {
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('user',JSON.stringify(data.user));
-                window.location.assign("/player/games");
+                window.location.assign("/home");
             }
             ).catch(err => {
                 console.log(err);
             });
-    }
+    }else{
+        NotificationManager.error('Insert all fields!', "", 2000);
+    } 
+}
 
     render() {
         if (this.state.loading) {
@@ -66,7 +73,7 @@ export default class Register extends React.Component {
                                             <Input name="password" label="Password" type="password" onChange={this.handleChange} />
                                         </Grid.Row>
                                         <Grid.Row>
-                                            <Input name="confirmPassword" label="Password" type="password" onChange={this.handleChange} />
+                                            <Input name="confirmPassword" label="Confirm Password" type="password" onChange={this.handleChange} />
                                         </Grid.Row>
                                         <Grid.Row>
                                             <Input name="nickname" label="Nickname" onChange={this.handleChange} />

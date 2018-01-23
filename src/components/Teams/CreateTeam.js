@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import { Redirect } from 'react-router'
 import { Dropdown, Input, Button, Icon, Grid, Radio } from 'semantic-ui-react';
+import {NotificationManager, NotificationContainer} from 'react-notifications'
 
 export default class CreateTeam extends React.Component {
     constructor(props) {
@@ -28,6 +29,7 @@ export default class CreateTeam extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        if(this.state.name!="" || this.state.image_url!=""){    
         fetch('http://127.0.0.1:3000/team/invite', {
             method: 'POST',
             headers: {
@@ -41,10 +43,17 @@ export default class CreateTeam extends React.Component {
         }).then((body) => {
             console.log(body)
             if (body.status === 200) {
+                NotificationManager.success('Invite sent!','');  
                 this.setState({ redirect: true })
+            }
+            if (body.message === "User to create team not found") {
+                NotificationManager.error('Invited user not found! Use the correct username!',"",2000);   
             }
 
         });
+        }else{
+            NotificationManager.error('Insert all fields!', "", 2000);
+        }
     }
 
     render() {

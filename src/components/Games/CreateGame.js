@@ -3,6 +3,7 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import { Redirect } from 'react-router';
 import { Dropdown, Input, Button, Icon, Grid } from 'semantic-ui-react';
+import {NotificationManager, NotificationContainer} from 'react-notifications'
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -54,6 +55,7 @@ export default class CreateGame extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        if(this.state.local!="" || this.state.hour!="" || this.state.minutes!=""){   
         console.log(JSON.stringify({ game: this.state }))
         fetch('http://127.0.0.1:3000/game/', {
             method: 'POST',
@@ -70,6 +72,9 @@ export default class CreateGame extends React.Component {
                 this.setState({ redirect: true, lobby_id: body.url_id })
 
         });
+        }else{
+            NotificationManager.error('Insert all fields!', "", 2000);
+        }   
     }
 
     render() {
