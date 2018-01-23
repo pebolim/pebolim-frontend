@@ -45,7 +45,7 @@ export default class ListTeam extends React.Component {
                     <Item.Group>
                         {this.state.teams.map((item, i) => (
                             <Item key={"team" + i}>
-                            <Item.Image size="tiny" src={item.image_url == null ? require("../../assets/images/noteam.png") : require(item.image_url)}/>
+                            <Item.Image size="tiny" src={item.image_url == null ? require("../../assets/images/noteam.png") : item.image_url}/>
                             <Item.Content verticalAlign="middle">
                                 <Item.Header style={{color:"#22b782"}}>{item.name}</Item.Header>
                                 <Item.Meta style={{color:"white"}}>

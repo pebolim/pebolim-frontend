@@ -71,7 +71,7 @@ export default class PublicGame extends React.Component {
                                             Data: <Time value={game.match_day} format="YYYY/MM/DD" />
                                         </Grid.Column>
                                         <Grid.Column style={{fontSize:15}}>
-                                            <div style={{paddingBottom:10}}><h3>Espaços Disponíveis: {game.numPlayers}/4</h3></div>
+                                            <div style={{paddingBottom:10}}><h3>Lotação: {game.numPlayers}/4</h3></div>
                                             <div><h3>Administrador do jogo: {game.owner}</h3></div>
                                         </Grid.Column>
                                     </Grid.Row>
