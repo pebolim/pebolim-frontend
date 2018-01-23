@@ -1,61 +1,61 @@
 import React from 'react';
-import { Image, Grid } from 'semantic-ui-react';
+import { Link } from "react-router-dom";
+import { Grid, Image, Button, Segment, Input, Icon } from 'semantic-ui-react'
+import ListTeams from './Teams/ListTeams'
+import PublicGames from './Games/PublicGames'
+import '../styles/home.css'
+import Divider from 'semantic-ui-react/dist/commonjs/elements/Divider/Divider';
+import Redirect from 'react-router-dom/Redirect';
+import GridColumn from 'semantic-ui-react/dist/commonjs/collections/Grid/GridColumn';
 
 export default class Home extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = { openPlay: false, gameURL: '' }
+
+        this.handlePlayGame = this.handlePlayGame.bind(this);
+    }
+
+    handleOpenPlay = () => { this.setState({ openPlay: true }) }
+
+    handleClosePlay = () => { this.setState({ openPlay: false }) }
+
+    handlePlayGame = () => {
+        window.location.assign('/game/' + this.state.gameURL + '/lobby')
+    }
+    handleInputChange = (e) => { this.setState({ gameURL: e.target.value }) }
 
     render() {
         return (
-            <div>HOME</div>
-            // <Grid>
-            //     <Grid.Row centered stretched>
-            //         <Image src={require('../assets/images/bannerPEBOLIM.png')} />
-            //     </Grid.Row>
-            //     <Grid.Row>
-            //         <div style={{ fontSize: 50, fontFamily: 'Teko', fontWeight: 600, paddingLeft: 50, paddingTop: 25 }}>
-            //             About us...
-            //         </div>
-            //         <div style={{ fontSize: 20, paddingLeft: 25, paddingTop: 30 }}>
-            //             We are a bunch of nerds who also play table football, so we wanted to create a platform that could help us organize and gather data about our games, so we came up with Pebolim to resolve those problems.
-            //         </div>
-            //     </Grid.Row>
-            //     <Grid.Row centered columns={4} style={{ paddingTop: 30 }}>
-            //         <Grid.Column>
-            //             <Image src={require('../assets/images/creatorImage.png')} />
-            //             <div style={{ fontSize: 30, textAlign: 'center', fontWeight: 600, paddingTop: 10 }}>
-            //                 Nabo1
-            //             </div>
-            //         </Grid.Column>
-            //         <Grid.Column>
-            //             <Image src={require('../assets/images/creatorImage.png')} />
-            //             <div style={{ fontSize: 30, textAlign: 'center', fontWeight: 600, paddingTop: 10 }}>
-            //                 Nabo2
-            //             </div>
-            //         </Grid.Column>
-            //         <Grid.Column>
-            //             <Image src={require('../assets/images/creatorImage.png')} />
-            //             <div style={{ fontSize: 30, textAlign: 'center', fontWeight: 600, paddingTop: 10 }}>
-            //                 Nabo3
-            //             </div>
-            //         </Grid.Column>
-            //     </Grid.Row>
-
-            //     <Grid.Row centered columns={4} style={{ paddingTop: 30 }}>
-            //         <Grid.Column>
-            //             <Image src={require('../assets/images/creatorImage.png')} />
-            //             <div style={{ fontSize: 30, textAlign: 'center', fontWeight: 600, paddingTop: 10 }}>
-            //                 Nabo4
-            //             </div>
-            //         </Grid.Column>
-            //         <Grid.Column>
-            //             <Image src={require('../assets/images/creatorImage.png')} />
-            //             <div style={{ fontSize: 30, textAlign: 'center', fontWeight: 600, paddingTop: 10 }}>
-            //                 Nabo5
-            //             </div>
-            //         </Grid.Column>
-            //     </Grid.Row>
-            // </Grid >
-        );
+            <Grid celled="internally">
+                <Grid.Column width={11}>
+                    <Grid>
+                        <Grid.Row>
+                            <Grid.Column width={7}>
+                                <Link to="/game/create"><Button fluid style={{ marginTop: 0 + 'px' }}>Create Game</Button></Link>
+                            </Grid.Column>
+                            <Grid.Column>
+                                <Divider vertical style={{ color: "white" }}>Or</Divider>
+                            </Grid.Column>
+                            <Grid.Column width={7}>
+                                <Input
+                                    fluid
+                                    onChange={this.handleInputChange}
+                                    placeholder="Insert your game code"
+                                    action={{content: "Play", onClick: this.handlePlayGame }} />
+                            </Grid.Column>
+                        </Grid.Row>
+                        <Grid.Row>
+                            <Grid.Column>
+                                <PublicGames />
+                            </Grid.Column>
+                        </Grid.Row>
+                    </Grid>
+                </Grid.Column>
+                <Grid.Column width={5}>
+                    <ListTeams />
+                </Grid.Column>
+            </Grid>
+        )
     }
 }
-
-

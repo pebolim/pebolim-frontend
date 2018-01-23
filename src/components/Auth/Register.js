@@ -37,6 +37,7 @@ export default class Register extends React.Component {
         }).then(response => response.json()
             ).then(function (data) {
                 localStorage.setItem('token', data.token);
+                localStorage.setItem('user',JSON.stringify(data.user));
                 window.location.assign("/player/games");
             }
             ).catch(err => {

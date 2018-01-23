@@ -29,7 +29,8 @@
             left: 0;
             bottom: 0;
             margin-bottom: 15px;
-            background-color:rgba(28, 28, 28, 0.65);    
+            background-color:#292929;  
+            
         }
 
             .game-board-content{
@@ -75,14 +76,34 @@
                         top: 50%;
                         background-color: #1A1A1A;
                         border-radius: 5px !important;
-                        padding: 6px 15px;
+                        padding: 8px 17px;
                         margin-right:5%;
                     }
                         .game-board-state{
                             font-family: 'Nunito Sans', sans-serif;
                             font-size: 1.1em;
-                            color: rgb(20, 235, 85);
+                            color: #fafafa;
                             font-weight: 700;
+                            
+                        }
+                        .game-live > span, .game-finished> span{
+                            display: inline-block;
+                        }
+                        .game-live > div{
+                            background-color: #13f21e;
+                            margin-right: 8px;
+                            float: left;
+                            width: 17px;
+                            height: 17px;
+                            border-radius: 50%; 
+                        }
+                        .game-finished > div{
+                            background-color: #e52200;
+                            margin-right: 8px;
+                            float: left;
+                            width: 17px;
+                            height: 17px;
+                            border-radius: 50%;
                         }
                                   
                 .game-board-info-box{
@@ -165,7 +186,7 @@
                             position: absolute;
                             font-family: 'Teko', sans-serif;
                             font-weight: 300;
-                            font-size: 5em;
+                            font-size: 7.5em;
                             left: 50%;
                             transform: translateX(-50%);
                             bottom: 20px;
@@ -173,6 +194,9 @@
                         }
                         
                         .game-date{
+                            color:#000;
+                            font-size: 1.1em;
+                            font-weight: 700;
                             padding-top:10px;
                             height: 15%;
                             display: block;
@@ -182,11 +206,12 @@
                             height: 10%;
                             display: block;
                             font-family: 'Nunito Sans', sans-serif;
+                            color:#4ff9bc;
                         }
                         
                 
     .game-details{
-        background-color:rgba(28, 28, 28, 0.65);
+        background-color:#292929;
         height: 40%;
         position: relative;
     }
@@ -213,7 +238,40 @@
 
         .game-details-container{
             height: 80%;
+            overflow-y: auto;
         }
+            .game-details-container > div{
+                display:block;
+                height: 15%;
+                margin-top: 1%;
+                background-color:#212121;
+                position: relative;
+                
+            }
+            .left-side-goal{             
+                border-right: 2px solid #ccc;
+                margin-right: calc(50% - 2px);               
+            }
+            .right-side-goal{
+                border-left: 2px solid #ccc;
+                margin-left: 50%;
+            }
+
+            .right-side-goal > div > span,
+            .left-side-goal > div > span {
+                padding-right: 10px;
+            }
+
+            .right-side-goal > div,
+            .left-side-goal > div {
+                font-family: 'Nunito Sans', sans-serif;
+                font-size: 1.1em;
+                font-weight: 600;
+                position: absolute;
+                transform: translate(-50%,-50%) !important;
+                top:50%;
+                left:50%;
+            }
 
 
 
@@ -221,6 +279,8 @@
 
 .game-control-box{
     background-color:#1C1C1C;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
 
 .game-control-content{
@@ -250,9 +310,62 @@
     height: 60%;
     position: relative;
 }
-    .game-commands > button {
-        
+    .game-goals-selection {
+        /* padding-top:15%; */
     }
+
+        .game-team-separator {
+            background-color:#292929;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: 500;
+            padding:10px 0;
+            margin: 10% 0;
+        }
+
+        .game-players-wrapper {
+            padding-left: 5%;
+            padding-right: 5%;
+            width: 100%;
+        }
+        .game-player:first-child{
+            margin-right: 4%;
+        }
+            .game-player{
+                color: #D6D6D6;
+                background-color: transparent;
+                width: 48%;
+                padding:11px 0px !important;
+                display: inline-block;
+                text-align: center;
+                overflow: hidden;
+                text-transform: uppercase;
+                font-size: 0.9em;
+                outline: none;
+            }
+            
+                .space{
+                    width: 4%;
+                    height: 100%;
+                    display: inline-block;
+                }
+
+                .player-red{
+                    border: 2px solid #e03434;
+                }
+
+                .player-red:hover{
+                    background-color: #e03434;
+                    cursor: pointer;
+                }
+
+                .player-blue{
+                    border: 2px solid #1C8BFF;              
+                }
+                .player-blue:hover{
+                    background-color: #1C8BFF;
+                    cursor: pointer;
+                }
 
 .game-finish-button-wrapper{
     height: 20%;

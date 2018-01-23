@@ -9,8 +9,7 @@ export default class CreateTeam extends React.Component {
         this.state = {
             name: '',
             image_url: '',
-            partner: '',
-            is_official: false
+            partner: ''
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,32 +18,32 @@ export default class CreateTeam extends React.Component {
 
     handleInputChange(event) {
         const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const value = target.value;
         const name = target.name;
 
         this.setState({
             [name]: value
         });
     }
-    
+
     handleSubmit(event) {
         event.preventDefault();
-        console.log(this.state);
-        var self = this;
         fetch('http://127.0.0.1:3000/team/invite', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization':localStorage.getItem('token')
+                'Authorization': localStorage.getItem('token')
             },
             body: JSON.stringify(this.state)
-        }).then(function (response) {
+        }).then((response) => {
             return response.json();
-        }).then(function (body) {
+        }).then((body) => {
             console.log(body)
-            if (body.status === 201)
-                self.setState({ redirect: true })
+            if (body.status === 200) {
+                this.setState({ redirect: true })
+            }
+
         });
     }
 
@@ -52,34 +51,9 @@ export default class CreateTeam extends React.Component {
         const { redirect } = this.state;
 
         if (redirect) {
-            return <Redirect to={"/home/"} />;
+            return <Redirect to={"/home"} />;
         }
-        let official = null;
-        if (this.state.is_official) {
-            official = 
-            <Grid>
-                <Grid.Row columns='equal'>
-                    <Grid.Column>
-                        <div>
-                            <h3>Nome: </h3>
-                        </div>
-                    </Grid.Column>
-                    <Grid.Column width={14}>
-                        <Input fluid value={this.state.name} name="name" onChange={this.handleInputChange} icon='trophy' placeholder='Nome da equipa...' />
-                    </Grid.Column>
-                </Grid.Row>
-                <Grid.Row columns='equal'>
-                    <Grid.Column>
-                        <div>
-                            <h3>Emblema: </h3>
-                        </div>
-                    </Grid.Column>
-                    <Grid.Column width={14}>
-                        <Input type="file" id="file" fluid value={this.state.image_url} name="image_url" onChange={this.handleInputChange} icon='image' />
-                    </Grid.Column>
-                </Grid.Row>
-            </Grid>;
-        }
+
         return (
 
             <div>
@@ -100,21 +74,29 @@ export default class CreateTeam extends React.Component {
                     <Grid.Row>
                         <h1>Equipa</h1>
                     </Grid.Row>
+                </Grid>
+                <Grid>
                     <Grid.Row columns='equal'>
                         <Grid.Column>
                             <div>
-                                <h3>Oficializar equipa: </h3>
+                                <h3>Nome: </h3>
                             </div>
                         </Grid.Column>
                         <Grid.Column width={14}>
-                            <div className="ui fitted toggle checkbox">
-                                <input type="checkbox" name="is_official" onChange={this.handleInputChange} readOnly="" tabIndex="0" />
-                                <label></label>
+                            <Input fluid value={this.state.name} name="name" onChange={this.handleInputChange} icon='trophy' placeholder='Nome da equipa...' />
+                        </Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row columns='equal'>
+                        <Grid.Column>
+                            <div>
+                                <h3>Emblema: </h3>
                             </div>
+                        </Grid.Column>
+                        <Grid.Column width={14}>
+                            <Input type="text" id="file" fluid value={this.state.image_url} name="image_url" onChange={this.handleInputChange} icon='image' placeholder='Url da imagem...' />
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
-                {official}
                 <Grid>
                     <Grid.Row columns={5}>
                         <Grid.Column>

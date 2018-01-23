@@ -11,3 +11,7 @@
 .pagination{
     display: inline;
 }
+
+.ui.active.transition.visible.dimmer{
+    background-color:#262626;
+}
