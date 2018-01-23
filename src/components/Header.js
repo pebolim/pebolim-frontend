@@ -89,7 +89,7 @@ export default class Header extends React.Component {
         fetch(`http://localhost:3000/teams/pendent/`, myInit)
             .then(result => result.json())
             .then(invs => {
-                if (invs.status==401){
+                if (invs.status===401){
                     localStorage.clear();
                     window.location.href="/login"
                 }else{
