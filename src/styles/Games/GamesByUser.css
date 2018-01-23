@@ -1,22 +1,17 @@
-.container{
-    background-color:#cccccc;
-    margin-top:2%;
+.ui.container{
+    width: 80%;
+    margin-bottom:35px;
+    background-color:#1a1818;
+    border-radius: 15px;
 }
-#title {
-    color:#00FFA2;
-    text-align: center;
-}
-
-.header {
-    text-align:center;
+.ui.center.aligned.header, .ui.centered.header {
+    color: white;
 }
 
-.ui.blue.header,
-.ui.red.header{
-    font-size: 5rem;
+.pagination{
+    display: inline;
 }
 
-.ui.black.header{
-    font-size: 3rem;
-    margin-top: 5%;
+.ui.active.transition.visible.dimmer{
+    background-color:#262626;
 }

@@ -1,6 +1,8 @@
 import React from 'react';
-import Time from 'react-time-format'
-import { Container, Header } from 'semantic-ui-react';
+import { Input, Form, Dimmer, Loader, Grid, Image, Header, Button } from 'semantic-ui-react'
+import '../../styles/register.css'
+import {NotificationManager, NotificationContainer} from 'react-notifications'
+
 
 export default class Register extends React.Component {
     constructor(props) {
@@ -10,7 +12,9 @@ export default class Register extends React.Component {
             email: '',
             password: '',
             nickname: '',
-            age: 0
+            age: 0,
+            image_url: 'creatorImage.png',
+            loading: false
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -28,41 +32,72 @@ export default class Register extends React.Component {
     }
 
     handleSubmit(event) {
+        console.log(this.state);
         event.preventDefault();
-        fetch('https://127.0.0.1:3000/signin', {
+        if(this.state.email!="" && this.state.password!="" && this.state.nickname!="" && this.state.age!=0){   
+
+        fetch('http://127.0.0.1:3000/signin', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(this.state)
-        }).then(res => {
-            localStorage.setItem('token', res.token);
-        }).catch(err => {
-            console.log(err);
-        });
-    }
+        }).then(response => response.json()
+            ).then(function (data) {
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('user',JSON.stringify(data.user));
+                window.location.assign("/home");
+            }
+            ).catch(err => {
+                console.log(err);
+            });
+    }else{
+        NotificationManager.error('Insert all fields!', "", 2000);
+    } 
+}
 
     render() {
-        return (
-            <form onSubmit={this.handleSubmit}>
-                <label>
-                    Email:
-              <input type="email" value={this.state.email} onChange={this.handleChange} />
-                </label>
-                <label>
-                    Nickname:
-              <input type="text" value={this.state.nickname} onChange={this.handleChange} />
-                </label>
-                <label>
-                    Password:
-              <input type="password" value={this.state.password} onChange={this.handleChange} />
-                </label>
-                <label>
-                    Password:
-              <input type="number" value={this.state.age} onChange={this.handleChange} />
-                </label>
-                <input type="submit" value="Submit" />
-            </form>
-        );
+        if (this.state.loading) {
+            return (<Dimmer active>
+                <Loader />
+            </Dimmer>)
+        } else {
+            return (
+                <div>
+                    <Header>Sign In</Header>
+                    <Grid columns={2} padded>
+                        <Grid.Column>
+                            <Form id="form">
+                                <Form.Group>
+                                    <Grid>
+                                        <Grid.Row>
+                                            <Input name="email" label="Email" onChange={this.handleChange} />
+                                        </Grid.Row>
+                                        <Grid.Row>
+                                            <Input name="password" label="Password" type="password" onChange={this.handleChange} />
+                                        </Grid.Row>
+                                        <Grid.Row>
+                                            <Input name="confirmPassword" label="Confirm Password" type="password" onChange={this.handleChange} />
+                                        </Grid.Row>
+                                        <Grid.Row>
+                                            <Input name="nickname" label="Nickname" onChange={this.handleChange} />
+                                        </Grid.Row>
+                                        <Grid.Row>
+                                            <Input name="age" label="Age" onChange={this.handleChange} />
+                                        </Grid.Row>
+                                    </Grid>
+                                </Form.Group>
+                            </Form>
+                        </Grid.Column>
+                        <Grid.Column textAlign="center">
+                            <Grid.Row>
+                                <Image centered src={require('../../assets/images/logoPEBOLIM.png')} size="medium" />
+                                <Button type="submit" content="Sign Up" onClick={this.handleSubmit}></Button>
+                            </Grid.Row>
+                        </Grid.Column>
+                    </Grid>
+                </div>
+            )
+        }
     }
 }

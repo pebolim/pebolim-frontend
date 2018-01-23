@@ -1,47 +1,123 @@
 import React from 'react';
 import moment from 'moment';
-import { Input, Form } from 'semantic-ui-react';
+import { Redirect } from 'react-router'
+import { Dropdown, Input, Button, Icon, Grid, Radio } from 'semantic-ui-react';
+import {NotificationManager, NotificationContainer} from 'react-notifications'
 
-const optionsAttack = [
-    {text: 'Luís', value: 'luis' },
-    {text: 'Ricardo', value: 'ricardo' },
-]
-const optionsDefend = [
-    {text: 'David', value: 'david' },
-    {text: 'Rafael', value: 'rafael' },
-    {text: 'Diogo', value: 'diogo' }
-]
-
-
-export default class Home extends React.Component {
+export default class CreateTeam extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            startDate: moment()
+            name: '',
+            image_url: '',
+            partner: ''
         };
-        this.handleChange = this.handleChange.bind(this);
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-    handleChange(date) {
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+
         this.setState({
-            startDate: date
+            [name]: value
         });
     }
 
-    
+    handleSubmit(event) {
+        event.preventDefault();
+        if(this.state.name!="" || this.state.image_url!=""){    
+        fetch('http://127.0.0.1:3000/team/invite', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('token')
+            },
+            body: JSON.stringify(this.state)
+        }).then((response) => {
+            return response.json();
+        }).then((body) => {
+            console.log(body)
+            if (body.status === 200) {
+                NotificationManager.success('Invite sent!','');  
+                this.setState({ redirect: true })
+            }
+            if (body.message === "User to create team not found") {
+                NotificationManager.error('Invited user not found! Use the correct username!',"",2000);   
+            }
+
+        });
+        }else{
+            NotificationManager.error('Insert all fields!', "", 2000);
+        }
+    }
+
     render() {
+        const { redirect } = this.state;
+
+        if (redirect) {
+            return <Redirect to={"/home"} />;
+        }
+
         return (
+
             <div>
-                <h1>Criar Equipa</h1>
-                <Form>
-                <Form.Group widths='equal'>
-                    <Form.Input label='Nome da equipa' placeholder='Nome' />
-                    <Form.Input label='Slogan' placeholder='Slogan' />
-                    <Form.Select label='Atacante' options={optionsAttack} placeholder='Atacante' />
-                    <Form.Select label='Defesa' options={optionsDefend} placeholder='Defesa' />
-                </Form.Group>
-                <Form.Button>Criar</Form.Button>
-                </Form>
+                <Grid>
+                    <Grid.Row>
+                        <h1>Convidar jogador</h1>
+                    </Grid.Row>
+                    <Grid.Row columns='equal'>
+                        <Grid.Column>
+                            <div>
+                                <h3>Jogador: </h3>
+                            </div>
+                        </Grid.Column>
+                        <Grid.Column width={14}>
+                            <Input fluid value={this.state.partner} name="partner" onChange={this.handleInputChange} icon='fighter jet' placeholder='Jogador...' />
+                        </Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row>
+                        <h1>Equipa</h1>
+                    </Grid.Row>
+                </Grid>
+                <Grid>
+                    <Grid.Row columns='equal'>
+                        <Grid.Column>
+                            <div>
+                                <h3>Nome: </h3>
+                            </div>
+                        </Grid.Column>
+                        <Grid.Column width={14}>
+                            <Input fluid value={this.state.name} name="name" onChange={this.handleInputChange} icon='trophy' placeholder='Nome da equipa...' />
+                        </Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row columns='equal'>
+                        <Grid.Column>
+                            <div>
+                                <h3>Emblema: </h3>
+                            </div>
+                        </Grid.Column>
+                        <Grid.Column width={14}>
+                            <Input type="text" id="file" fluid value={this.state.image_url} name="image_url" onChange={this.handleInputChange} icon='image' placeholder='Url da imagem...' />
+                        </Grid.Column>
+                    </Grid.Row>
+                </Grid>
+                <Grid>
+                    <Grid.Row columns={5}>
+                        <Grid.Column>
+                            <Button fluid animated onClick={this.handleSubmit}>
+                                <Button.Content visible>Next</Button.Content>
+                                <Button.Content hidden>
+                                    <Icon name='right arrow' />
+                                </Button.Content>
+                            </Button>
+                        </Grid.Column>
+                    </Grid.Row>
+                </Grid>
             </div>
         );
     }

@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "acorn": "^5.2.1",
-    "moment": "^2.19.2",
+    "moment": "^2.20.1",
     "prop-types": "^15.6.0",
     "react": "^16.1.0",
     "react-bootstrap": "^0.31.5",
@@ -12,8 +12,10 @@
     "react-dom": "^16.1.0",
     "react-fontawesome": "^1.6.1",
     "react-hover-observer": "^2.0.2",
+    "react-notifications": "^1.4.3",
     "react-router-dom": "^4.2.2",
     "react-scripts": "^1.0.17",
+    "react-time-format": "0.0.5",
     "semantic-ui-react": "^0.77.0"
   },
   "scripts": {
@@ -21,8 +23,5 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  },
-  "devDependencies": {
-    "react-time-format": "0.0.5"
   }
 }
