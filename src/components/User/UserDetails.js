@@ -46,7 +46,7 @@ export default class UserDetails extends React.Component {
                     <Grid>
                         <Grid.Column width={4} >
                             <Grid.Column style={{ backgroundColor: '#353535', paddingTop: 15, paddingLeft: 10, paddingRight: 10 }}>
-                                <Image src={require('../../assets/images/datboy.png')} centered />
+                                <Image src={this.state.user.image_url!=null ? this.state.user.image_url : require("../../assets/images/creatorImage.png")} centered />
                                 <div style={{ fontSize: 30, textAlign: 'center', fontWeight: 600, paddingTop: 10 }}>
                                     {this.state.user.nickname}
                                 </div>

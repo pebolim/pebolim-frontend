@@ -3,7 +3,6 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { Image, Responsive, Icon, Sidebar, Menu, Container, Dropdown } from 'semantic-ui-react';
 
-
 import '../styles/header.css';
 
 function LoginButton(props) {
@@ -60,8 +59,8 @@ function LogoutButton(props) {
     return (
         <Menu.Menu position="right">
             <DropDownTeamInvitations invites={props} />
-            <Menu.Item><Link to='/user/details'>{JSON.parse(localStorage.getItem('user')).nickname}</Link></Menu.Item>
-            <Menu.Item><a onClick={() => { localStorage.removeItem('token'); localStorage.removeItem('user'); window.location.href = ("/") }}>Logout</a></Menu.Item>
+            <Menu.Item as="a" href='/user/details'>{JSON.parse(localStorage.getItem('user')).nickname}</Menu.Item>
+            <Menu.Item as='a' onClick={() => { localStorage.removeItem('token'); localStorage.removeItem('user'); window.location.href = ("/") }}>Logout</Menu.Item>
         </Menu.Menu>
     );
 }
@@ -137,7 +136,7 @@ export default class Header extends React.Component {
                                 <Menu.Item>
                                     <Image src={require('../assets/images/logoPEBOLIM.png')} size='mini' as="a" href="/"/>
                                 </Menu.Item>
-                                <Menu.Item as="a" style={{display:localStorage.getItem('token') == null ? 'none' : 'block'}} href="/home">Home</Menu.Item>
+                                <Menu.Item as="a" style={{display:localStorage.getItem('token') == null ? 'none' : 'inherit'}} href="/home">Home</Menu.Item>
                             </Menu.Menu>
                             {log}
                         </Menu>

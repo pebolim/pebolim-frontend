@@ -4,22 +4,43 @@
 }
 
 .ui.menu :hover{
-    color:#3c38f8;
+    color:#2185d0;
 }
 
 .ui.link.menu .item:hover, .ui.menu .dropdown.item:hover, .ui.menu .link.item:hover{
-    color:#00ff94;
+    color:#00FFA2;
 }
 
 .ui.menu:not(.vertical) .item{
-    color:#00ff94;
+    color:#00FFA2;
     text-transform: uppercase;
     font-size: 1.5em;
     cursor:pointer;   
 }
 
 .ui.menu a.item:hover{
-    color:#3c38f8;
+    color:#2185d0;
+}
+
+.ui.fluid.button{
+    background-color:#22B782;
+    color:white
+}
+
+.ui.fluid.button:hover{
+    color:#22B782;
+    background-color:white
+}
+
+.ui.action.input:not([class*="left action"])>.button:last-child{
+    background-color:#22B782;
+    color:white
+}
+
+.ui.action.input:not([class*="left action"])>.button:last-child:hover{
+    color:#22B782;
+    background-color:white;
+    border-left:1px solid #22b782;
 }
 
 

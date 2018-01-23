@@ -47,7 +47,7 @@ export default class ListTeam extends React.Component {
                             <Item key={"team" + i}>
                             <Item.Image size="tiny" src={item.image_url == null ? require("../../assets/images/noteam.png") : require(item.image_url)}/>
                             <Item.Content verticalAlign="middle">
-                                <Item.Header style={{color:"#1c8bff"}}>{item.name}</Item.Header>
+                                <Item.Header style={{color:"#22b782"}}>{item.name}</Item.Header>
                                 <Item.Meta style={{color:"white"}}>
                                     <span>{item.partner.nickname}</span>
                                     </Item.Meta>
@@ -59,7 +59,7 @@ export default class ListTeam extends React.Component {
                     <Grid>
                     <Grid.Row>
                         <Grid.Column width={16} textAlign="center">
-                            <Link to='/team/create' style={{ cursor: "pointer"}}><Button color="blue" style={{fontFamily:" Lato,'Helvetica Neue',Arial,Helvetica,sans-serif"}}>Create Team</Button></Link>
+                            <Link to='/team/create' style={{ cursor: "pointer"}}><Button style={{fontFamily:" Lato,'Helvetica Neue',Arial,Helvetica,sans-serif", backgroundColor:"#22b782", color:"white"}}>Create Team</Button></Link>
                         </Grid.Column>
                     </Grid.Row>
                     </Grid>
