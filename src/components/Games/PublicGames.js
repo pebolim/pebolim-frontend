@@ -51,7 +51,6 @@ export default class PublicGame extends React.Component {
 
         return (
             <div>
-                <Link to='/game/create' style={{ cursor: "pointer" }}><Button>Create Game</Button></Link>
                 <Header id="title" as="h1" textAlign="center" style={{paddingBottom: 10}}>Jogos Públicos</Header>
                 {
                     this.state.games.map((game, i) =>
