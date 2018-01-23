@@ -4,6 +4,7 @@ import { Container, Header, Grid, Statistic, Menu, Dimmer, Loader } from 'semant
 import "../../styles/Games/GamesByUser.css"
 
 
+
 export default class Game extends React.Component {
     constructor(props) {
         super(props);
