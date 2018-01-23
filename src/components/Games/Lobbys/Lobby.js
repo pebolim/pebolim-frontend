@@ -54,6 +54,7 @@ export default class Lobby extends React.Component {
                     this.setState({ message: result.message });
                 }
                 this.setState({ load: result.status });
+                console.log(this.state.game_details)
             })
     }
 

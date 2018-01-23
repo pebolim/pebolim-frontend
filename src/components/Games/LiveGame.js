@@ -146,18 +146,17 @@ export default class LiveGame extends React.Component {
         e.preventDefault();
         var time = this.getTime();
         var self = this;
-
         fetch('http://127.0.0.1:3000/game/'+this.state.lobby_id+'/goal', {
             method: 'POST',
             headers: {
                 "Authorization": localStorage.getItem("token"),
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({time: time, user: player}) 
+            body: JSON.stringify({time: time, user: player, team:team})
         }).then(function(response){
             return response.json();
         }).then(function(data){
-            console.log(data)
+            //console.log(data)
             if(data.status === 201)
                 self.addGoal(player, time);             
         });      
@@ -165,7 +164,7 @@ export default class LiveGame extends React.Component {
 
 
     addGoal(player, time){
-        console.log('goal added!')
+        //console.log('goal added!')
         const goals = this.state.goals;
         goals.unshift({user: player, time: parseInt(time)});
         
@@ -192,7 +191,7 @@ export default class LiveGame extends React.Component {
                         }
                     }
                 });
-            console.log(players)    
+            //console.log(players)    
             this.setState({ players: players }); 
         })
         
@@ -245,7 +244,7 @@ const Goal = props => {
 }
 
 const GameState = props => {
-    console.log(props.state)
+    //console.log(props.state)
     return (
         <div>
             {props.state === 3? 

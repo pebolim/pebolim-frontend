@@ -78,7 +78,8 @@ export default class Header extends React.Component {
     }
 
     getInvites = () => {
-        /*var headers = new Headers({
+        /*
+        var headers = new Headers({
             "Authorization": localStorage.getItem("token"),
             'Content-Type': 'application/json'
         });

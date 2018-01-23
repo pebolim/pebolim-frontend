@@ -3,6 +3,7 @@ import Time from 'react-time-format'
 import { Link } from "react-router-dom";
 import { Container, Header, Grid, Statistic, Menu, Dimmer, Loader, Button } from 'semantic-ui-react';
 import { Redirect } from 'react-router';
+import "../../styles/Games/PublicGames.css"
 
 export default class PublicGame extends React.Component {
     constructor(props) {
@@ -29,10 +30,17 @@ export default class PublicGame extends React.Component {
             .then(result => result.json())
             .then(gms => {
                 if(gms.status===200)
-                    this.setState({ games:gms.games, loading:false})
+                    this.setState({ games:gms.games.sort(this.compare), loading:false})
             });
     }
 
+    compare(a,b) {
+        if (a.match_day < b.match_day)
+          return -1;
+        if (a.match_day > b.match_day)
+          return 1;
+        return 0;
+      }
     handleClick(i){
         this.setState({redirect:true, selected_game:this.state.games[i].url})
     }
@@ -51,12 +59,11 @@ export default class PublicGame extends React.Component {
 
         return (
             <div>
-                <Link to='/game/create' style={{ cursor: "pointer" }}><Button>Create Game</Button></Link>
                 <Header id="title" as="h1" textAlign="center" style={{paddingBottom: 10}}>Jogos Públicos</Header>
                 {
                     this.state.games.map((game, i) =>
                         (
-                            <Container fluid key={i} onClick={()=>this.handleClick(i)}>
+                            <div fluid key={i} onClick={()=>this.handleClick(i)} className="game_details">
                                 <Grid columns='equal'>
                                     <Grid.Row>
                                         <Grid.Column textAlign="left" style={{paddingLeft:40}} >
@@ -69,7 +76,7 @@ export default class PublicGame extends React.Component {
                                         </Grid.Column>
                                     </Grid.Row>
                                 </Grid>
-                            </Container>
+                            </div>
                         ))
                 }
             </div>
